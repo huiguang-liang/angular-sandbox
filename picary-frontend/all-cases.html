@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap viewport declaration -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- favicon -->
+  <link rel='shortcut icon' type='image/x-icon' href='resources/favicon.ico' />
+
+  <!-- Title -->
+  <title>PICARY</title>
+
+  <!-- Import scripts -->
+  <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Cormorant:500i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet">
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Styling options -->
+  <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="resources/theme.css">
+</head>
+
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-top navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed navbar-text" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="resources/picary.svg" class="img-responsive center-block navbar-logo" alt="Responsive image"></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Admin</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Logout<span class="glyphicon glyphicon-log-out icon-left-padding" aria-hidden="true"></span></a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <!-- Sidebar & Content -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-xs-4 col-sm-3 col-md-2">
+        <div class="well sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="sidebar-hello text-center">Hi, Jason!</li>
+            <li class="sidebar-label">Case Management</li><hr>
+            <li class="active"><a href="#">All Cases <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Create New Case</a></li>
+            <li class="sidebar-label">External Liasion</li><hr>
+            <li><a href="#">All Liasion</a></li>
+            <li><a href="#">Create New Liasion</a></li>
+            <li class="sidebar-label">Report Generation</li><hr>
+            <li><a href="#">Generate Reports</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="col-xs-8 col-sm-9 col-md-10">
+
+        <div class="container container-mainbody">
+          <div class="page-header mainbody-header">
+            <h2>Case Management</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Search and Filter Options</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="pull-right">
+                    <ul class="list-inline vert-align pull-right" style="margin-bottom: 0px;">
+                      <li>
+                        <div class="dropdown">Case Status:
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select <span class="caret"></span></button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="#">Open</a></li>
+                            <li><a href="#">Closed</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li><div class="input-group" style="max-width: 600px;">
+                        <span class="input-group-addon">Search All Fields:</span>
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default vert-align" type="button"><span class="glyphicon glyphicon-search" style="top:3px;" aria-hidden="true"></span></button>
+                        </span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- <ul class="list-inline vert-align pull-right" style="margin-bottom: 0px;">
+                    <li><div class="dropdown">Case Status:
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select <span class="caret"></span></button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a href="#">Open</a></li>
+                        <li><a href="#">Closed</a></li>
+                      </ul>
+                      </div>
+                    </li>
+                    <li>Text 3</li>
+                    <li><div class="input-group" style="max-width: 600px;">
+                      <input type="text" class="form-control" placeholder="Search for...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                      </span>
+                      </div>
+                    </li>
+                  </ul> -->
+                </div>
+              </div>
+              <!-- <div class="well">
+                <div class="row" style="vertical-align: middle;">
+                  <div class="col-md-4 col-lg-4">
+                    <em>Search and Filter Options</em>
+                  </div>
+                  <div class="col-md-8 col-lg-8">
+                    <ul class="list-inline pull-right" style="margin-bottom: 0px;">
+                      <li><div class="dropdown">Case Status:
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select <span class="caret"></span></button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                          <li><a href="#">Open</a></li>
+                          <li><a href="#">Closed</a></li>
+                        </ul>
+                        </div>
+                      </li>
+                      <li>Text 3</li>
+                    </ul>
+                  </div>
+                </div>
+              </div> -->
+                <!-- <div class"pull-left"><em>Search and Filter Options</em></div> -->
+                <!-- <span class="pull-left"><em>Search and Filter Options</em></span>
+                <ul class="list-inline pull-right"> -->
+                  <!-- <li>Text 1</li>
+                  <li>Text 2</li>
+                  <li>Text 3</li>
+                  <li><div class="dropdown">Case Status:
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select <span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <li><a href="#">Open</a></li>
+                      <li><a href="#">Closed</a></li>
+                    </ul>
+                    </div>
+                  </li> -->
+                  <!-- <li><div class="input-group input-group-inline" style="width: 400px;">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                  </li> -->
+                <!-- </ul> -->
+
+            </div>
+          </div>
+          <table class="table table-striped table-hover table-bordered table-condensed table-vertical-align">
+            <thead>
+              <th>Case Ref.</th>
+              <th>Student Name</th>
+              <th>Applicant Name</th>
+              <th>Referred By Org.</th>
+              <th>Referred By</th>
+              <th>Services Referred For</th>
+              <th>Referral Date</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NE41276</td>
+                <td>Lee Ah Ling</td>
+                <td>Lee Ah Long</td>
+                <td>EVPS</td>
+                <td><mark>Jason Lee</mark></td>
+                <td>Financial Assistance</td>
+                <td>02 Feb '17</td>
+                <td>
+                  <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select <span class="caret"></span></button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                  </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <hr class="hr-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <p class="text-center">
+          <small>
+            All rights reserved by <a href="http://www.trampolene.org">Trampolene Ltd.</a>, A*StartCentral @ Block 79, Unit #05-03, 79 Ayer Rajah Crescent, Singapore 139955
+          </small></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
