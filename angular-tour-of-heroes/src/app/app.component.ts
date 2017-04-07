@@ -41,7 +41,6 @@ export class Hero {
     return h.id === this.id && h.name === this.name;
   }
 
-  // public static listHeroesExcluding(h: Hero[]) {
   listHeroesExcluding(h: Hero[]) {
     var r: Hero = this;
 
@@ -90,11 +89,10 @@ export class AppComponent {
     new Hero('Celeritas'),
     new Hero('Magneta'),
     new Hero('RubberMan'),
-    // new Hero('Dynama'),
-    // new Hero('Dr. IQ'),
-    // new Hero('Magma'),
-    // new Hero('Tornado'),
+    new Hero('Dynama'),
+    new Hero('Dr. IQ'),
+    new Hero('Magma'),
+    new Hero('Tornado'),
   ];
-  // heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
   randomHero = this.heroes[H.rand(0, this.heroes.length)];
 }
