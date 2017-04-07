@@ -4,25 +4,36 @@ import { Helper } from './app.helpers';
 let H = new Helper;
 
 // Class declarations
-export class Id {
-  private id: number = 0;
-  constructor () {
+export class Ident {
 
+  protected id: number;
+  protected static Id: Ident;
+
+  constructor () {
+    this.id = 0;
   }
+
+  static getInstance(): Ident {
+    if (!this.Id) {
+      this.Id = new Ident();
+    }
+    return this.Id;
+  }
+
   public getNextId() {
     return this.id++;
   }
 }
-
-let I = new Id;
 
 export class Hero {
 
   readonly id: number;
   public name: string;
 
+  idInstance = Ident.getInstance();
+
   constructor (n: string) {
-    this.id = I.getNextId();
+    this.id = this.idInstance.getNextId();
     this.name = n;
   }
 
@@ -30,17 +41,17 @@ export class Hero {
     return h.id === this.id && h.name === this.name;
   }
 
-  public static listHeroesExcluding(h: Hero[], r: Hero) {
-  // listHeroesExcluding(h: Hero[], excludeH: Hero[]) {
-    //var heroes = Array.from(h, x => x.valueOf());
-    // var excludeHeroes = Array.from(h, x => x.valueOf());
-    //
-    // return heroes.concat(excludeHeroes).toString();
-    // return heroes;
+  // public static listHeroesExcluding(h: Hero[]) {
+  listHeroesExcluding(h: Hero[]) {
+    var r: Hero = this;
+
     var heroes = h.filter(function(x) {
       return !x.isEqual(r);
     });
-    return Array.from(heroes, x => x.valueOf());
+
+    var heroNames = Array.from(heroes, x => x.name);
+
+    return heroNames.splice(0, heroNames.length - 2).concat(heroNames.splice(-2).join(" & ")).join(", ");
   }
 
   valueOf() {
@@ -60,7 +71,8 @@ export class Hero {
         <hr>
         <div class="jumbotron jumbotron-add-padding">
           <h1>Random hero of the day is {{ randomHero.name }}!</h1>
-          <p>The other heros are: <span *ngFor="let hero of heroes; let last = last; let first = first; let i = index">{{hero.valueOf()}}</span></p>
+          <!--<p>The other heros are: <span *ngFor="let hero of heroes; let last = last; let first = first; let i = index">{{hero.valueOf()}}</span></p>-->
+          <p>The rest of the roster: {{ randomHero.listHeroesExcluding(heroes) }}</p>
         </div>
       </div>
     </div>
@@ -74,10 +86,10 @@ export class AppComponent {
     new Hero('Windstorm'),
     new Hero('Bombasto'),
     new Hero('Mr. Nice'),
-    // new Hero('Narco'),
-    // new Hero('Celeritas'),
-    // new Hero('Magneta'),
-    // new Hero('RubberMan'),
+    new Hero('Narco'),
+    new Hero('Celeritas'),
+    new Hero('Magneta'),
+    new Hero('RubberMan'),
     // new Hero('Dynama'),
     // new Hero('Dr. IQ'),
     // new Hero('Magma'),
