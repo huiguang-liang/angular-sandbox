@@ -34,7 +34,6 @@ var Hero = (function () {
     Hero.prototype.isEqual = function (h) {
         return h.id === this.id && h.name === this.name;
     };
-    // public static listHeroesExcluding(h: Hero[]) {
     Hero.prototype.listHeroesExcluding = function (h) {
         var r = this;
         var heroes = h.filter(function (x) {
@@ -64,16 +63,22 @@ var AppComponent = (function () {
             new Hero('Celeritas'),
             new Hero('Magneta'),
             new Hero('RubberMan'),
+            new Hero('Dynama'),
+            new Hero('Dr. IQ'),
+            new Hero('Magma'),
+            new Hero('Tornado'),
         ];
-        // heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
         this.randomHero = this.heroes[H.rand(0, this.heroes.length)];
     }
+    AppComponent.prototype.onSelect = function (hero) {
+        this.selectedHero = hero;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n    <div class=\"row\" style=\"margin: 15px;\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1\">\n        <h1>{{title}}</h1>\n        <hr>\n        <div class=\"jumbotron jumbotron-add-padding\">\n          <h1>Random hero of the day is {{ randomHero.name }}!</h1>\n          <!--<p>The other heros are: <span *ngFor=\"let hero of heroes; let last = last; let first = first; let i = index\">{{hero.valueOf()}}</span></p>-->\n          <p>The rest of the roster: {{ randomHero.listHeroesExcluding(heroes) }}</p>\n        </div>\n      </div>\n    </div>\n  ",
+        template: "\n    <div class=\"row\" style=\"margin: 15px;\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1\">\n        <h1>{{title}}</h1>\n        <hr>\n        <div class=\"jumbotron jumbotron-add-padding\">\n          <h1>Random hero of the day is {{ randomHero.name }}!</h1>\n          <!--<p>The other heros are: <span *ngFor=\"let hero of heroes; let last = last; let first = first; let i = index\">{{hero.valueOf()}}</span></p>-->\n          <p>The rest of the roster: {{ randomHero.listHeroesExcluding(heroes) }}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\" style=\"margin: 15px;\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1\">\n        <h2>Hero Roster</h2>\n        <table class=\"table table-condensed heroes\">\n          <thead>\n          <tr>\n            <th class=\"col-xs-1 col-sm-1 col-md-1\">ID</th>\n            <th>Name</th>\n          </tr>\n          </thead>\n          <tbody>\n          <tr *ngFor=\"let hero of heroes\" [class.selected]=\"hero === selectedHero\" (click)=\"onSelect(hero)\">\n            <td>{{hero.id}}</td>\n            <td>{{hero.name}}</td>\n          </tr>\n          </tbody>\n        </table>\n        <!--<ul>\n          <li *ngFor=\"let hero of heroes\">{{hero}}</li>\n        </ul>-->\n      </div>\n    </div>\n    <div class=\"row\" style=\"margin: 15px;\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1\">\n        <div *ngIf=\"selectedHero\">\n          <h2>Hero Editor</h2>\n            <div class=\"panel panel-default\">\n            <div class=\"panel-heading\">\n              <h3 class=\"panel-title\">You've selected {{selectedHero.name}}.</h3>\n            </div>\n            <div class=\"panel-body\">\n              <form class=\"form-inline\">\n                <label>ID: </label> {{selectedHero.id}}\n                <div class=\"form-group\">\n                  <label for=\"heroName\">Name: </label>\n                  <input type=\"text\" class=\"form-control\" id=\"heroName\" [(ngModel)]=\"selectedHero.name\" name=\"selectedHero.name\" placeholder=\"name\">\n                </div>\n              </form>\n            </div>\n          </div>\n        <div>\n      </div>\n    </div>\n  ",
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

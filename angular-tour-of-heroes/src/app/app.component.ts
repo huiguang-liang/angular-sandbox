@@ -75,6 +75,49 @@ export class Hero {
         </div>
       </div>
     </div>
+    <div class="row" style="margin: 15px;">
+      <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <h2>Hero Roster</h2>
+        <table class="table table-condensed heroes">
+          <thead>
+          <tr>
+            <th class="col-xs-1 col-sm-1 col-md-1">ID</th>
+            <th>Name</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <!--<ul>
+          <li *ngFor="let hero of heroes">{{hero}}</li>
+        </ul>-->
+      </div>
+    </div>
+    <div class="row" style="margin: 15px;">
+      <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <div *ngIf="selectedHero">
+          <h2>Hero Editor</h2>
+            <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">You've selected {{selectedHero.name}}.</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-inline">
+                <label>ID: </label> {{selectedHero.id}}
+                <div class="form-group">
+                  <label for="heroName">Name: </label>
+                  <input type="text" class="form-control" id="heroName" [(ngModel)]="selectedHero.name" name="selectedHero.name" placeholder="name">
+                </div>
+              </form>
+            </div>
+          </div>
+        <div>
+      </div>
+    </div>
   `,
 })
 
@@ -95,4 +138,9 @@ export class AppComponent {
     new Hero('Tornado'),
   ];
   randomHero = this.heroes[H.rand(0, this.heroes.length)];
+  selectedHero: Hero;
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }
