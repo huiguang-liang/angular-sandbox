@@ -92,9 +92,6 @@ export class Hero {
           </tr>
           </tbody>
         </table>
-        <!--<ul>
-          <li *ngFor="let hero of heroes">{{hero}}</li>
-        </ul>-->
       </div>
     </div>
     <div class="row" style="margin: 15px;">
