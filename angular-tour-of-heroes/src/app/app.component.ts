@@ -14,10 +14,16 @@ import { HeroService } from './hero.service';
       <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <h1>{{title}}</h1>
         <hr>
-        <div class="jumbotron jumbotron-add-padding">
+        <div class="jumbotron jumbotron-add-padding" *ngIf="randomHero; else loadingBlock">
           <h1>Random hero of the day is {{ randomHero.name }}!</h1>
           <p>The rest of the roster: {{ randomHero.listHeroesExcluding(heroes) }}</p>
         </div>
+        <ng-template #loadingBlock>
+          <div class="jumbotron jumbotron-add-padding">
+            <h1>Loading Hero Roster ...</h1>
+            <p>Please be patient! We will display the roster of heroes as soon as it is loaded</p>
+          </div>
+        </ng-template>
       </div>
     </div>
     <div class="row" style="margin: 15px;">
@@ -55,7 +61,10 @@ export class AppComponent implements OnInit {
   constructor(private heroService: HeroService, private helper: Helper) { }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroesSlowly().then(heroes => {
+      this.heroes = heroes;
+      this.randomHero = this.heroes[this.helper.rand(0, this.heroes.length)];
+    });
   }
 
   getRandomHero(): void {
@@ -64,7 +73,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
-    this.getRandomHero();
+    // this.getRandomHero();
   }
 
   onSelect(hero: Hero): void {
