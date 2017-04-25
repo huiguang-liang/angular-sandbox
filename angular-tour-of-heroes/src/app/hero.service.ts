@@ -15,6 +15,10 @@ export class HeroService {
 
   constructor(private helperService: HelperService) { }
 
+  getHero(id: number): Promise<Hero> {
+    return this.getHeroesCached().then( heroes => heroes.find( hero => hero.id === id ) );
+  }
+
   getHeroes(): Promise<Hero[]> {
     return Promise.resolve(HEROES);
   }

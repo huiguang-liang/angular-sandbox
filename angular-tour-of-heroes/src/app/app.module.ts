@@ -29,8 +29,12 @@ import { HelperService } from './helpers.service';
       },
       {
         path: '',
-        redirectTo: '/heroes',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
+      },
+      {
+        path: 'detail/:id',
+        component: HeroDetailComponent
       },
     ]),
   ],

@@ -39,7 +39,7 @@ import { HeroService } from './hero.service';
         </table>
       </div>
     </div>
-    <hero-detail [hero]="selectedHero"></hero-detail>
+    <!--<hero-detail [hero]="selectedHero"></hero-detail>-->
   `,
 })
 
