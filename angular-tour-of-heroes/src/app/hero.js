@@ -2,10 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ident_1 = require("./ident");
 var Hero = (function () {
-    function Hero(n) {
-        this.idInstance = ident_1.Ident.getInstance();
-        this.id = this.idInstance.getNextId();
-        this.name = n;
+    function Hero(name) {
+        this.name = name;
+        this.id = ident_1.Ident.getInstance().getNextId();
     }
     Hero.prototype.isEqual = function (h) {
         return h.id === this.id && h.name === this.name;

@@ -18,7 +18,7 @@ var heroes_component_1 = require("./heroes.component");
 var dashboard_component_1 = require("./dashboard.component");
 // Import services
 var hero_service_1 = require("./hero.service");
-var helpers_1 = require("./helpers");
+var helpers_service_1 = require("./helpers.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -46,7 +46,7 @@ AppModule = __decorate([
             ]),
         ],
         declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent],
-        providers: [hero_service_1.HeroService, helpers_1.Helper],
+        providers: [hero_service_1.HeroService, helpers_service_1.HelperService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

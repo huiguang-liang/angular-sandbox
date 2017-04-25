@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard.component';
 
 // Import services
 import { HeroService } from './hero.service';
-import { Helper } from './helpers';
+import { HelperService } from './helpers.service';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import { Helper } from './helpers';
     ]),
   ],
   declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent ],
-  providers:    [ HeroService, Helper ],
+  providers:    [ HeroService, HelperService ],
   bootstrap:    [ AppComponent ]
 })
 

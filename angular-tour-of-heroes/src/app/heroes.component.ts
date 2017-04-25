@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Helper } from './helpers';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -51,7 +50,7 @@ export class HeroesComponent implements OnInit {
   selectedHero: Hero;
   randomHero: Hero;
 
-  constructor(private heroService: HeroService, private helper: Helper) { }
+  constructor(private heroService: HeroService) { }
 
   getHeroes(): void {
     this.heroService.getHeroesCached().then(heroes => {

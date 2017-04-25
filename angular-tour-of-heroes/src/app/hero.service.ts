@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
+// Import classes
 import { Hero } from './hero';
 import { HEROES } from './init-heroes';
-import { Helper } from './helpers';
+
+// Import services
+import { HelperService } from './helpers.service';
 
 @Injectable()
 export class HeroService {
@@ -10,7 +13,7 @@ export class HeroService {
   cachedPromise: Promise<Hero[]>;
   cachedRandomHero: Promise<Hero>;
 
-  constructor(private helper: Helper) { }
+  constructor(private helperService: HelperService) { }
 
   getHeroes(): Promise<Hero[]> {
     return Promise.resolve(HEROES);
@@ -28,7 +31,7 @@ export class HeroService {
   }
 
   getRandomHero(): Promise<Hero> {
-    this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(heroes => Promise.resolve(heroes[this.helper.rand(0, heroes.length)]));
+    this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(heroes => Promise.resolve(heroes[this.helperService.rand(0, heroes.length)]));
     return this.cachedRandomHero;
   }
 }

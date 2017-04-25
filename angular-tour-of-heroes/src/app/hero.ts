@@ -3,13 +3,9 @@ import { Ident } from './ident';
 export class Hero {
 
   readonly id: number;
-  public name: string;
 
-  idInstance = Ident.getInstance();
-
-  constructor (n: string) {
-    this.id = this.idInstance.getNextId();
-    this.name = n;
+  constructor ( public name: string ) {
+    this.id = Ident.getInstance().getNextId();
   }
 
   isEqual(h: Hero) {

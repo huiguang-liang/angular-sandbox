@@ -11,10 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var init_heroes_1 = require("./init-heroes");
-var helpers_1 = require("./helpers");
+// Import services
+var helpers_service_1 = require("./helpers.service");
 var HeroService = (function () {
-    function HeroService(helper) {
-        this.helper = helper;
+    function HeroService(helperService) {
+        this.helperService = helperService;
     }
     HeroService.prototype.getHeroes = function () {
         return Promise.resolve(init_heroes_1.HEROES);
@@ -31,14 +32,14 @@ var HeroService = (function () {
     };
     HeroService.prototype.getRandomHero = function () {
         var _this = this;
-        this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(function (heroes) { return Promise.resolve(heroes[_this.helper.rand(0, heroes.length)]); });
+        this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(function (heroes) { return Promise.resolve(heroes[_this.helperService.rand(0, heroes.length)]); });
         return this.cachedRandomHero;
     };
     return HeroService;
 }());
 HeroService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [helpers_1.Helper])
+    __metadata("design:paramtypes", [helpers_service_1.HelperService])
 ], HeroService);
 exports.HeroService = HeroService;
 //# sourceMappingURL=hero.service.js.map
