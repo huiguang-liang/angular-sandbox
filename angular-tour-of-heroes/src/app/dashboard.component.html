@@ -1,12 +1,26 @@
 <div class="row" style="margin: 15px;">
   <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <h2>Top Heroes</h2>
-    <div class="grid grid-pad">
-      <div *ngFor="let hero of topHeroes" class="col-1-4">
-        <div class="module hero">
-          <h4>{{hero.name}}</h4>
+    <div class="row">
+      <div *ngIf="topHeroes; else loadingBlock">
+        <div *ngFor="let hero of topHeroes">
+          <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+              <div class="caption" style="padding: 18px;">
+                <h3 style="margin-top: 10px; margin-bottom: 10px;">{{hero.name}}</h3>
+                <p>This hero has an id of {{hero.id}}.</p>
+                <p><a [routerLink]="['/detail', hero.id]" class="btn btn-primary" role="button">View Details</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <ng-template #loadingBlock>
+        <div class="jumbotron jumbotron-add-padding">
+          <h1>Loading Hero Dashboard ...</h1>
+          <p>Please be patient! We will display the dashboard as soon as it is ready.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
