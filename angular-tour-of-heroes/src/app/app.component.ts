@@ -12,8 +12,8 @@ import { Component } from '@angular/core';
     <div class="row" style="margin: 15px;">
       <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation"><a routerLink="/dashboard">Dashboard</a></li>
-          <li role="presentation"><a routerLink="/heroes">Heroes Roster</a></li>
+          <li role="presentation" routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></li>
+          <li role="presentation" routerLinkActive="active"><a routerLink="/heroes">Heroes Roster</a></li>
         </ul>
       </div>
     </div>

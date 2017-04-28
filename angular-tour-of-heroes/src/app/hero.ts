@@ -32,4 +32,8 @@ export class Hero {
       name: this.name
     });
   }
+
+  toJson(): JSON {
+    return JSON.parse(this.valueOf());
+  }
 }

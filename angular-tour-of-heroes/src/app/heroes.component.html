@@ -26,7 +26,7 @@
       <tbody>
       <tr *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
         <td>{{hero.id}}</td>
-        <td>{{hero.name}}</td>
+        <td><span [ngClass]="['hero']">{{hero.name}}</span></td>
       </tr>
       </tbody>
     </table>
