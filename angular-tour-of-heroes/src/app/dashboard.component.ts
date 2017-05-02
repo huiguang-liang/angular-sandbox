@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroesCached().then(heroes => {
-      this.topHeroes = heroes.slice(1,5);
+      this.topHeroes = heroes.slice(0,4);
     });
     this.heroService.getRandomHero().then(hero => {
       this.randomHero = hero;

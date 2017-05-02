@@ -5,7 +5,7 @@ export class Ident {
 
   static getInstance(): Ident {
     this.Id = this.Id || new Ident();
-    this.Id.id = this.Id.id || 0;
+    this.Id.id = this.Id.id || 1;
     return this.Id;
   }
 

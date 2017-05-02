@@ -2,10 +2,10 @@ import { Ident } from './ident';
 
 export class Hero {
 
-  readonly id: number;
+  //readonly id: number;
 
-  constructor ( public name: string ) {
-    this.id = Ident.getInstance().getNextId();
+  constructor ( public name: string, public id = Ident.getInstance().getNextId()) {
+    //this.id = Ident.getInstance().getNextId();
   }
 
   isEqual(h: Hero) {

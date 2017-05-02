@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 // Import classes
 import { Hero } from './hero';
-import { HEROES } from './init-heroes';
+//import { HEROES } from './init-heroes';
 
 // Import services
 import { HelperService } from './helpers.service';
@@ -21,7 +21,9 @@ export class HeroService {
   constructor(private helperService: HelperService, private http: Http) { }
 
   getHero(id: number): Promise<Hero> {
-    return this.getHeroesCached().then( heroes => heroes.find( hero => hero.id === id ) );
+    //return this.getHeroesCached().then( heroes => heroes.find( hero => hero.id === id ) );
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get(url).toPromise().then(response => this.getHeroFromJson(response.json().data)).catch(this.handleError);
   }
 
   getHeroes(): Promise<Hero[]> {
@@ -34,17 +36,12 @@ export class HeroService {
   }
 
   getHeroFromJson(json: JSON): Hero {
-    return new Hero(json['name']);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred! ', error);
-    return Promise.reject(error);
+    return new Hero(json['name'], json['id']);
   }
 
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise(resolve => {
-      setTimeout( () => resolve(this.getHeroes()), 2000 );
+      setTimeout( () => resolve(this.getHeroes()), 1000 );
     });
   }
 
@@ -56,5 +53,11 @@ export class HeroService {
   getRandomHero(): Promise<Hero> {
     this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(heroes => Promise.resolve(heroes[this.helperService.rand(0, heroes.length)]));
     return this.cachedRandomHero;
+  }
+
+  /* Generic Error Handler */
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred! ', error);
+    return Promise.reject(error);
   }
 }
