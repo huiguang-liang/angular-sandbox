@@ -13,6 +13,9 @@
     </ng-template>
   </div>
 </div>
+
+<new-hero></new-hero>
+
 <div class="row" style="margin: 15px;">
   <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <h2>Hero Roster</h2>
@@ -40,8 +43,8 @@
           <h3 class="panel-title">You've selected <span style="font-weight: bold;">{{selectedHero.name}}</span>.</h3>
         </div>
         <div class="panel-body">
-          <label>ID: </label> {{selectedHero.id}}
-          <label>Name: </label> {{selectedHero.name}}
+          <label class="label-inline">ID: </label> <p class="label-inline">{{selectedHero.id}}</p>
+          <label class="label-inline">Name: </label> <p class="label-inline">{{selectedHero.name}}</p>
           <button type="button" class="btn btn-default" (click)="onClickView()">View More Details</button>
           <!-- <a [routerLink]="['/detail', selectedHero.id]" class="btn btn-primary" role="button">View Details</a> -->
         </div>

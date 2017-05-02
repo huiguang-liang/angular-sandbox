@@ -43,4 +43,8 @@ export class HeroesComponent implements OnInit {
   onClickView(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
+
+  addHero(heroName: String): void {
+    console.log('Add ' + heroName);
+  }
 }

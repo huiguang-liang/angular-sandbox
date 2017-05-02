@@ -2,11 +2,7 @@ import { Ident } from './ident';
 
 export class Hero {
 
-  //readonly id: number;
-
-  constructor ( public name: string, public id = Ident.getInstance().getNextId()) {
-    //this.id = Ident.getInstance().getNextId();
-  }
+  constructor ( public name: string, public id = Ident.getInstance().getNextId()) {}
 
   isEqual(h: Hero) {
     return h.id === this.id && h.name === this.name;

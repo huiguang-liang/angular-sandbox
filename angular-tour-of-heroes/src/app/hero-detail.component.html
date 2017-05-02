@@ -8,11 +8,12 @@
         </div>
         <div class="panel-body">
           <form class="form-inline">
-            <label>ID: </label> {{hero.id}}
+            <label class="label-inline">ID: </label> <p class="label-inline">{{hero.id}}</p>
             <div class="form-group">
-              <label for="heroName">Name: </label>
+              <label for="heroName" class="label-inline">Name: </label>
               <input type="text" class="form-control" id="heroName" [(ngModel)]="hero.name" name="hero.name" placeholder="name">
             </div>
+            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
             <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
           </form>
         </div>

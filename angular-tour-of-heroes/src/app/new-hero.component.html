@@ -1,0 +1,19 @@
+<div class="row" style="margin: 15px;">
+  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <h2>Add A Hero</h2>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Enter the details of the new hero.</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-inline" [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+          <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['heroName'].valid && complexForm.controls['heroName'].touched}">
+            <label for="heroName" class="label-inline">Name: </label> <input type="text" class="form-control" placeholder="Hero Name" [formControl]="complexForm.controls['heroName']" id="heroName" #heroName />
+            <button type="submit" class="btn btn-primary" [disabled]="!complexForm.valid" (click)="addHero(heroName.value)">Add</button>
+            <div *ngIf="complexForm.controls['heroName'].hasError('required') && complexForm.controls['heroName'].touched" class="warning-inline">You must include a valid hero name.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

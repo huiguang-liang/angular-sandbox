@@ -14,6 +14,32 @@ body {
   font-weight: 300;
 }
 
+.label-inline {
+  display: inline-block;
+  margin: 0px;
+  vertical-align: middle;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.warning-inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px;
+  line-height: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-color: #faebcc;
+  background-color: #fcf8e3;
+  color: #8a6d3b;
+}
+
 /*.heroes td {
   cursor: pointer;
   position: relative;

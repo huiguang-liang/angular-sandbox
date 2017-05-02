@@ -15,8 +15,10 @@ export class HeroService {
 
   cachedPromise: Promise<Hero[]>;
   cachedRandomHero: Promise<Hero>;
+  private randomHeroId: number = -1;
 
   private heroesUrl = 'api/heroes';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private helperService: HelperService, private http: Http) { }
 
@@ -41,18 +43,31 @@ export class HeroService {
 
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise(resolve => {
-      setTimeout( () => resolve(this.getHeroes()), 1000 );
+      setTimeout( () => resolve(this.getHeroes()), 0 );
     });
   }
 
   getHeroesCached(): Promise<Hero[]> {
-    this.cachedPromise = this.cachedPromise || this.getHeroesSlowly();
+    //this.cachedPromise = this.cachedPromise || this.getHeroesSlowly();
+    this.cachedPromise = this.getHeroesSlowly();
+    this.cachedPromise.then(heroes => this.getAndSetRandomHeroId(heroes)).catch(this.handleError);
     return this.cachedPromise;
   }
 
+  getAndSetRandomHeroId(heroes: Hero[]): void {
+    let idArray = heroes.map(h => h.id);
+    this.randomHeroId = idArray.indexOf(this.randomHeroId) === -1 ? Number(idArray[this.helperService.rand(0, idArray.length)]) : this.randomHeroId;
+  }
+
   getRandomHero(): Promise<Hero> {
-    this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(heroes => Promise.resolve(heroes[this.helperService.rand(0, heroes.length)]));
+    //this.cachedRandomHero = this.cachedRandomHero || this.getHeroesCached().then(heroes => Promise.resolve(heroes[this.helperService.rand(0, heroes.length)]));
+    this.cachedRandomHero = this.getHeroesCached().then(heroes => Promise.resolve(heroes[heroes.map(h => h.id).indexOf(this.randomHeroId)]));
     return this.cachedRandomHero;
+  }
+
+  update(hero: Hero): Promise<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http.put(url, JSON.stringify(hero), {headers: this.headers}).toPromise().then(() => hero).catch(this.handleError);
   }
 
   /* Generic Error Handler */
