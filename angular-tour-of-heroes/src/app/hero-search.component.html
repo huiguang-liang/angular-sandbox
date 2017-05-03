@@ -1,0 +1,19 @@
+<div class="row" style="margin: 15px;">
+  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Search Hero Roster</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-inline">
+          <label class="label-inline">Search Hero: </label>
+          <input type="text" class="form-control" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+          <div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result"><span [ngClass]="['hero']">{{hero.name}}</span></div>
+          <!--<ul class="custom-dropdown" *ngIf="(heroes | async)?.length > 0">
+            <li *ngFor="let hero of heroes | async">{{hero.name}}</li>
+          </ul>-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

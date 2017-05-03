@@ -24,17 +24,20 @@
       <tr>
         <th class="col-xs-1 col-sm-1 col-md-1">ID</th>
         <th>Name</th>
+        <th class="col-xs-2 col-sm-2 col-md-2" style="text-align: center;">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
         <td>{{hero.id}}</td>
         <td><span [ngClass]="['hero']">{{hero.name}}</span></td>
+        <td style="text-align: center;"><button type="button" class="btn btn-danger" (click)="delete(hero); unselect(hero); $event.stopPropagation();">Delete</button></td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
 <div *ngIf="selectedHero">
   <div class="row" style="margin: 15px;">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">

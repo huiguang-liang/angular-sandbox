@@ -1,8 +1,9 @@
-import { Component, ReflectiveInjector, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HeroService } from './hero.service';
-import { HelperService } from './helpers.service';
+import { Hero } from './hero';
 import { Http } from '@angular/http';
+import { AppModule } from './app.module';
 
 // Class declarations
 @Component({
@@ -12,9 +13,10 @@ import { Http } from '@angular/http';
 
 export class NewHeroComponent implements OnInit {
 
-  private helperService: HelperService;
   private heroService: HeroService;
-  private http: Http;
+
+  heroes: Hero[];
+
   complexForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
@@ -24,16 +26,19 @@ export class NewHeroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.heroService = AppModule.injector.get(HeroService);
+    this.heroService.getHeroesCached().then(heroes => {this.heroes = heroes});
   }
 
   addHero(name: string) {
     name = name.trim();
     if (!name) { return; }
-    //this.heroService.create(name).then(hero => {});
+    this.heroService.create(name).then(hero => {
+      //this.heroes.push(hero);
+    });
   }
 
   submitForm(value: string){
-    console.log(value);
+    this.addHero(value);
   }
 }
