@@ -8,10 +8,10 @@
         <form class="form-inline">
           <label class="label-inline">Search Hero: </label>
           <input type="text" class="form-control" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-          <div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result"><span [ngClass]="['hero']">{{hero.name}}</span></div>
-          <!--<ul class="custom-dropdown" *ngIf="(heroes | async)?.length > 0">
-            <li *ngFor="let hero of heroes | async">{{hero.name}}</li>
-          </ul>-->
+          <!--<div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result"><span [ngClass]="['hero']">{{hero.name}}</span></div>-->
+          <ul class="custom-dropdown" *ngIf="(heroes | async)?.length > 0">
+            <li class="custom-dropdown-entry" *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)"><span [ngClass]="['hero']">{{hero.name}}</span></li>
+          </ul>
         </form>
       </div>
     </div>

@@ -11,6 +11,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/publishReplay';
 
 import { HeroSearchService } from './hero-search.service';
 import { Hero } from './hero';
@@ -39,6 +40,8 @@ export class HeroSearchComponent implements OnInit {
       .debounceTime(300) // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged() // ignore if next search term is same as previous
       .switchMap(term => term ? this.heroSearchService.search(term) : Observable.of<Hero[]>([])) // switch to new observable each time the term changes, return the http search observable or or the observable of empty heroes if there was no search term
+      .publishReplay(1) // cache the most recent value
+      .refCount() // keep the observable alive for as long as there are subscribers
       .catch(error => { console.log(error); return Observable.of<Hero[]>([]); });
   }
 
