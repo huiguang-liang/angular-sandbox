@@ -7,13 +7,14 @@
       <div class="panel-body">
         <form class="form-inline">
           <label class="label-inline">Search Hero: </label>
+          <div class="form-group custom-dropdown-container">
           <input type="text" class="form-control" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-          <!--<div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result"><span [ngClass]="['hero']">{{hero.name}}</span></div>-->
           <ng-container *ngIf="heroes|async;let heroesItems">
-          <ul class="custom-dropdown" *ngIf="heroesItems.length > 0">
-            <li class="custom-dropdown-entry" *ngFor="let hero of heroesItems" (click)="gotoDetail(hero)"><span [ngClass]="['hero']">{{hero.name}}</span></li>
-          </ul>
+            <ul class="custom-dropdown" *ngIf="heroesItems.length > 0">
+              <li class="custom-dropdown-entry" *ngFor="let hero of heroesItems" (click)="gotoDetail(hero)"><span [ngClass]="['hero']">{{hero.name}}</span></li>
+            </ul>
           </ng-container>
+          </div>
         </form>
       </div>
     </div>

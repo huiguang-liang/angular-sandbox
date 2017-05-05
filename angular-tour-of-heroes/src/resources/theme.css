@@ -103,20 +103,21 @@ body {
   font-weight: bold;
 }
 
+.custom-dropdown-container {
+  position: relative;
+}
+
 .custom-dropdown {
-  position: static;
-  display: block;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  position: absolute;
+  margin-top: 4px;
   clear: left;
   padding: 12px;
   top: 100%;
   left: 0;
+  right: 0;
   z-index: 1000;
   float: inherit;
   min-width: 160px;
-  font-size: 14px;
-  text-align: left;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
