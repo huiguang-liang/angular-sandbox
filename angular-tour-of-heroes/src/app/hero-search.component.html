@@ -9,9 +9,11 @@
           <label class="label-inline">Search Hero: </label>
           <input type="text" class="form-control" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
           <!--<div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result"><span [ngClass]="['hero']">{{hero.name}}</span></div>-->
-          <ul class="custom-dropdown" *ngIf="(heroes | async)?.length > 0">
-            <li class="custom-dropdown-entry" *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)"><span [ngClass]="['hero']">{{hero.name}}</span></li>
+          <ng-container *ngIf="heroes|async;let heroesItems">
+          <ul class="custom-dropdown" *ngIf="heroesItems.length > 0">
+            <li class="custom-dropdown-entry" *ngFor="let hero of heroesItems" (click)="gotoDetail(hero)"><span [ngClass]="['hero']">{{hero.name}}</span></li>
           </ul>
+          </ng-container>
         </form>
       </div>
     </div>
