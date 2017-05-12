@@ -44,6 +44,36 @@ export class HeroActions {
     };
   }
 
+  static GET_RANDOM_HERO = 'GET_RANDOM_HERO';
+  getRandomHero(): Action {
+    return {
+      type: HeroActions.GET_RANDOM_HERO
+    };
+  }
+
+  static GET_RANDOM_HERO_SUCCESS = 'GET_RANDOM_HERO_SUCCESS';
+  getRandomHeroSuccess(hero: Hero): Action {
+    return {
+      type: HeroActions.GET_RANDOM_HERO_SUCCESS,
+      payload: hero
+    };
+  }
+
+  static CHANGE_RANDOM_HERO = 'CHANGE_RANDOM_HERO';
+  changeRandomHero(): Action {
+    return {
+      type: HeroActions.CHANGE_RANDOM_HERO
+    };
+  }
+
+  static CHANGE_RANDOM_HERO_SUCCESS = 'CHANGE_RANDOM_HERO_SUCCESS';
+  changeRandomHeroSuccess(hero: Hero): Action {
+    return {
+      type: HeroActions.CHANGE_RANDOM_HERO_SUCCESS,
+      payload: hero
+    };
+  }
+
   static SAVE_HERO = 'SAVE_HERO';
   saveHero(hero: Hero): Action {
     return {

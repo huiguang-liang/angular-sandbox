@@ -27,7 +27,7 @@ import { HelperService } from './helpers.service';
 import { HeroActions } from './actions/hero-actions';
 
 // Import reducers
-import reducer from './reducers';
+import reducer from './reducers/index';
 
 @NgModule({
   imports: [
