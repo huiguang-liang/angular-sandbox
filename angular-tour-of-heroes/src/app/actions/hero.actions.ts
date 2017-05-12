@@ -6,17 +6,17 @@ import { Hero } from '../hero';
 @Injectable()
 export class HeroActions {
 
-  static LOAD_HEROES = 'LOAD_HEROES';
-  loadHeroes(): Action {
+  static GET_HEROES = 'GET_HEROES';
+  getHeroes(): Action {
     return {
-      type: HeroActions.LOAD_HEROES
+      type: HeroActions.GET_HEROES
     };
   }
 
-  static LOAD_HEROES_SUCCESS = 'LOAD_HEROES_SUCCESS';
-  loadHeroesSuccess(heroes: Hero[]): Action {
+  static GET_HEROES_SUCCESS = 'GET_HEROES_SUCCESS';
+  getHeroesSuccess(heroes: Hero[]): Action {
     return {
-      type: HeroActions.LOAD_HEROES_SUCCESS,
+      type: HeroActions.GET_HEROES_SUCCESS,
       payload: heroes
     };
   }
@@ -74,34 +74,34 @@ export class HeroActions {
     };
   }
 
-  static SAVE_HERO = 'SAVE_HERO';
-  saveHero(hero: Hero): Action {
+  static UPDATE_HERO = 'UPDATE_HERO';
+  updateHero(hero: Hero): Action {
     return {
-      type: HeroActions.SAVE_HERO,
+      type: HeroActions.UPDATE_HERO,
       payload: hero
     };
   }
 
-  static SAVE_HERO_SUCCESS = 'SAVE_HERO_SUCCESS';
-  saveHeroSuccess(hero: Hero): Action {
+  static UPDATE_HERO_SUCCESS = 'UPDATE_HERO_SUCCESS';
+  updateHeroSuccess(hero: Hero): Action {
     return {
-      type: HeroActions.SAVE_HERO_SUCCESS,
+      type: HeroActions.UPDATE_HERO_SUCCESS,
       payload: hero
     };
   }
 
-  static ADD_HERO = 'ADD_HERO';
-  addHero(hero: Hero): Action {
+  static CREATE_HERO = 'CREATE_HERO';
+  createHero(name: string): Action {
     return {
-      type: HeroActions.ADD_HERO,
-      payload: hero
+      type: HeroActions.CREATE_HERO,
+      payload: name
     };
   }
 
-  static ADD_HERO_SUCCESS = 'ADD_HERO_SUCCESS';
-  addHeroSuccess(hero: Hero): Action {
+  static CREATE_HERO_SUCCESS = 'CREATE_HERO_SUCCESS';
+  createHeroSuccess(hero: Hero): Action {
     return {
-      type: HeroActions.ADD_HERO_SUCCESS,
+      type: HeroActions.CREATE_HERO_SUCCESS,
       payload: hero
     };
   }

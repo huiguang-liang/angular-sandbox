@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { Injector } from '@angular/core';
 import { Store, StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 // Import components
 import { AppComponent } from './app.component';
@@ -24,10 +25,13 @@ import { HeroService } from './hero.service';
 import { HelperService } from './helpers.service';
 
 // Import actions
-import { HeroActions } from './actions/hero-actions';
+import { HeroActions } from './actions/hero.actions';
 
 // Import reducers
 import reducer from './reducers/index';
+
+// Import effects
+import { HeroEffects } from './effects/hero.effects';
 
 @NgModule({
   imports: [
@@ -37,7 +41,8 @@ import reducer from './reducers/index';
     AppRoutingModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    StoreModule.provideStore(reducer)
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(HeroEffects)
   ],
   declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent ],
   providers:    [ HeroService, HelperService, HeroActions ],

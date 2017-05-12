@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 // Import classes
 import { Hero } from './hero';
 
-//Import services
+// Import services
 import { HeroService } from './hero.service';
 import { HelperService } from './helpers.service';
+
+import { AppState } from './reducers/index';
+import { HeroActions } from './actions/hero.actions';
+
+import 'rxjs/add/operator/switchMap';
 
 // Class declarations
 @Component({
@@ -21,7 +28,13 @@ export class HeroesComponent implements OnInit {
   selectedHero: Hero;
   randomHero: Hero;
 
-  constructor(private heroService: HeroService, private router: Router, private helperService: HelperService) { }
+  heroesState: Observable<any>;
+  heroesStateList: Hero[];
+
+  constructor(private heroService: HeroService, private router: Router, private helperService: HelperService, private store: Store<AppState>) {
+    this.heroesState = this.store.select('heroes');
+    this.heroesState.subscribe(heroes => console.log(heroes));
+  }
 
   getHeroes(): void {
     this.heroService.getHeroesCached().then(heroes => {
@@ -45,7 +58,7 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: Hero): void {
-    this.heroService.delete(hero).then(() => this.heroes = this.heroes.filter(x => x.id !== hero.id));
+    this.heroService.delete(hero).then(hero => this.heroes = this.heroes.filter(x => x.id !== hero.id));
   }
 
   unselect(hero: Hero): void {

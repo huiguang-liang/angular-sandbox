@@ -1,4 +1,4 @@
-import { HeroActions } from './hero-actions';
+import { HeroActions } from './hero.actions';
 
 export {
   HeroActions

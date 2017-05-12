@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { Hero } from '../hero';
-import { HeroActions } from '../actions/hero-actions';
+import { HeroActions } from '../actions/hero.actions';
 
 export type HeroState = Hero;
 

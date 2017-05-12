@@ -2,8 +2,8 @@ import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 //import '@ngrx/core/add/operator/select';
 
-import heroReducer, * as fromHero from './hero';
-import heroesReducer, * as fromHeroes from './hero-list';
+import heroReducer, * as fromHero from './hero.reducer';
+import heroesReducer, * as fromHeroes from './heroes.reducer';
 
 export interface AppState {
   hero: fromHero.HeroState;
