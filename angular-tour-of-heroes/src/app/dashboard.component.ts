@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { AppState } from './reducers/index';
+import { Observable } from 'rxjs/Observable';
+import { HeroActions } from './actions/hero.actions';
+
 // Import classes
 import { Hero } from  './hero';
 
@@ -15,8 +20,11 @@ export class DashboardComponent implements OnInit {
 
   topHeroes: Hero[];
   randomHero: Hero;
+  heroesState: Observable<any>;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, private store: Store<AppState>, private heroActions: HeroActions) {
+    this.heroesState = this.store.select('heroes');
+  }
 
   getHeroes(): void {
     this.heroService.getHeroesCached().then(heroes => {
@@ -29,5 +37,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+    this.store.dispatch( this.heroActions.getHeroes() );
   }
 }

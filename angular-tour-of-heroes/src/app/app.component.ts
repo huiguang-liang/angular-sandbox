@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AppState } from './reducers/index';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'my-app',
@@ -23,4 +26,10 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Tour of Heroes';
+  heroesState: Observable<any>;
+
+  constructor(private store: Store<AppState>) {
+    this.heroesState = this.store.select('heroes');
+    this.heroesState.subscribe(heroes => console.log('Heroes: ' + heroes.map(hero => hero.valueOf())));
+  }
 }

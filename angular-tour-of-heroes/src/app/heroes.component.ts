@@ -31,9 +31,8 @@ export class HeroesComponent implements OnInit {
   heroesState: Observable<any>;
   heroesStateList: Hero[];
 
-  constructor(private heroService: HeroService, private router: Router, private helperService: HelperService, private store: Store<AppState>) {
+  constructor(private heroService: HeroService, private router: Router, private helperService: HelperService, private store: Store<AppState>, private heroActions: HeroActions) {
     this.heroesState = this.store.select('heroes');
-    this.heroesState.subscribe(heroes => console.log(heroes));
   }
 
   getHeroes(): void {
@@ -47,6 +46,7 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+    this.store.dispatch( this.heroActions.getHeroes() );
   }
 
   onSelect(hero: Hero): void {
@@ -59,6 +59,7 @@ export class HeroesComponent implements OnInit {
 
   delete(hero: Hero): void {
     this.heroService.delete(hero).then(hero => this.heroes = this.heroes.filter(x => x.id !== hero.id));
+    this.store.dispatch( this.heroActions.deleteHero(hero) );
   }
 
   unselect(hero: Hero): void {

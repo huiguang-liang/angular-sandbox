@@ -22,7 +22,7 @@ export default function (state = initialState, action: Action): HeroListState {
       return (index >= 0) ? [...state.slice(0,index), action.payload, ...state.slice(index+1)] : state;
     }
     case HeroActions.DELETE_HERO_SUCCESS: {
-      return state.filter(function(x) {x.id != action.payload.id});
+      return state.filter(x => x.id != action.payload.id);
     }
     default: {
       return state;
