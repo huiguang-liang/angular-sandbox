@@ -27,6 +27,11 @@ export class HeroEffects {
     .switchMap(id => Observable.fromPromise(this.heroService.getHero(id)))
     .map(hero => this.heroActions.getHeroSuccess(hero));
 
+  @Effect() getRandomHero$ = this.update$
+    .ofType(HeroActions.GET_RANDOM_HERO)
+    .switchMap(() => Observable.fromPromise(this.heroService.getRandomHero()))
+    .map(hero => this.heroActions.getRandomHeroSuccess(hero));
+
   @Effect() updateHero$ = this.update$
     .ofType(HeroActions.UPDATE_HERO)
     .map(action => action.payload)

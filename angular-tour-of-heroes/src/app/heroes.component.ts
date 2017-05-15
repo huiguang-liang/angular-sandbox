@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 
 // Import classes
 import { Hero } from './hero';
@@ -21,32 +22,44 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './heroes.component.html',
 })
 
-export class HeroesComponent implements OnInit {
+export class HeroesComponent implements OnInit, OnDestroy {
 
   name = 'Angular';
   heroes: Hero[];
+
   selectedHero: Hero;
   randomHero: Hero;
 
   heroesState: Observable<any>;
-  heroesStateList: Hero[];
+  heroState: Observable<any>;
+  
+  heroesSub: Subscription[] = [];
 
   constructor(private heroService: HeroService, private router: Router, private helperService: HelperService, private store: Store<AppState>, private heroActions: HeroActions) {
     this.heroesState = this.store.select('heroes');
+    this.heroState = this.store.select('hero');
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroesCached().then(heroes => {
-      this.heroes = heroes;
-    });
-    this.heroService.getRandomHero().then(hero => {
-      this.randomHero = hero;
-    });
-  }
+  // getHeroes(): void {
+  //   this.heroService.getHeroesCached().then(heroes => {
+  //     this.heroes = heroes;
+  //   });
+  //   this.heroService.getRandomHero().then(hero => {
+  //     this.randomHero = hero;
+  //   });
+  // }
 
   ngOnInit(): void {
-    this.getHeroes();
+    //this.getHeroes();
+    this.heroesSub.push(this.heroesState.subscribe(heroes => {this.heroes = heroes;}));
+    this.heroesSub.push(this.heroState.subscribe(hero => {this.randomHero = hero;}));
     this.store.dispatch( this.heroActions.getHeroes() );
+    this.store.dispatch( this.heroActions.getRandomHero() );
+  }
+
+  ngOnDestroy(): void {
+    this.heroesSub.forEach(x => x.unsubscribe());
+    this.heroesSub = [];
   }
 
   onSelect(hero: Hero): void {
@@ -58,7 +71,7 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: Hero): void {
-    this.heroService.delete(hero).then(hero => this.heroes = this.heroes.filter(x => x.id !== hero.id));
+    //this.heroService.delete(hero).then(hero => this.heroes = this.heroes.filter(x => x.id !== hero.id));
     this.store.dispatch( this.heroActions.deleteHero(hero) );
   }
 
