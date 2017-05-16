@@ -15,6 +15,7 @@
             </div>
             <button type="button" class="btn btn-primary" (click)="save()">Save</button>
             <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+            <button type="button" class="btn btn-danger" (click)="delete(); $event.stopPropagation();">Delete</button>
           </form>
         </div>
       </div>

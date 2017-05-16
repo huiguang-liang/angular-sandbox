@@ -31,28 +31,18 @@ export class HeroesComponent implements OnInit, OnDestroy {
   randomHero: Hero;
 
   heroesState: Observable<any>;
-  heroState: Observable<any>;
+  randomHeroState: Observable<any>;
   
   heroesSub: Subscription[] = [];
 
   constructor(private heroService: HeroService, private router: Router, private helperService: HelperService, private store: Store<AppState>, private heroActions: HeroActions) {
     this.heroesState = this.store.select('heroes');
-    this.heroState = this.store.select('hero');
+    this.randomHeroState = this.store.select('randomHero');
   }
 
-  // getHeroes(): void {
-  //   this.heroService.getHeroesCached().then(heroes => {
-  //     this.heroes = heroes;
-  //   });
-  //   this.heroService.getRandomHero().then(hero => {
-  //     this.randomHero = hero;
-  //   });
-  // }
-
   ngOnInit(): void {
-    //this.getHeroes();
     this.heroesSub.push(this.heroesState.subscribe(heroes => {this.heroes = heroes;}));
-    this.heroesSub.push(this.heroState.subscribe(hero => {this.randomHero = hero;}));
+    this.heroesSub.push(this.randomHeroState.subscribe(hero => {this.randomHero = hero;}));
     this.store.dispatch( this.heroActions.getHeroes() );
     this.store.dispatch( this.heroActions.getRandomHero() );
   }
@@ -71,8 +61,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   delete(hero: Hero): void {
-    //this.heroService.delete(hero).then(hero => this.heroes = this.heroes.filter(x => x.id !== hero.id));
     this.store.dispatch( this.heroActions.deleteHero(hero) );
+    this.store.dispatch( this.heroActions.getRandomHero() );
   }
 
   unselect(hero: Hero): void {

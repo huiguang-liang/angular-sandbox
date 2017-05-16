@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { AppState } from './reducers/index';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
 import { HeroActions } from './actions/hero.actions';
 
 // Import classes
@@ -16,27 +18,23 @@ import { HeroService } from './hero.service';
   templateUrl: './dashboard.component.html'
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   topHeroes: Hero[];
-  randomHero: Hero;
   heroesState: Observable<any>;
+
+  heroesSub: Subscription;
 
   constructor(private heroService: HeroService, private store: Store<AppState>, private heroActions: HeroActions) {
     this.heroesState = this.store.select('heroes');
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroesCached().then(heroes => {
-      this.topHeroes = heroes.slice(0,4);
-    });
-    this.heroService.getRandomHero().then(hero => {
-      this.randomHero = hero;
-    });
+  ngOnInit(): void {
+      this.heroesSub = this.heroesState.subscribe(heroes => this.topHeroes = heroes.slice(0,4));
+    this.store.dispatch( this.heroActions.getHeroes() );
   }
 
-  ngOnInit(): void {
-    this.getHeroes();
-    this.store.dispatch( this.heroActions.getHeroes() );
+  ngOnDestroy(): void {
+    this.heroesSub.unsubscribe();
   }
 }
