@@ -42,7 +42,8 @@
     "typescript": "^2.2.2",
     "zone.js": "^0.8.4",
     "@ngrx/core": "^1.2.0",
-    "@ngrx/store": "^2.2.2"
+    "@ngrx/store": "^2.2.2",
+    "@ngrx/effects": "^2.0.3"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
