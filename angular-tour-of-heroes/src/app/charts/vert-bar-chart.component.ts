@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { SINGLE } from './data';
+import { SINGLE } from './vert-bar-chart.data';
+import * as chroma from 'chroma-js';
 
 @Component({
   selector: 'vert-bar-chart',
@@ -11,7 +10,7 @@ import { SINGLE } from './data';
 
 export class VertBarChartComponent implements OnInit {
 
-  @ViewChild('test') elementView: ElementRef;
+  @ViewChild('panel') elementView: ElementRef;
 
   SINGLE: any[];
   MULTI: any[];
@@ -30,7 +29,7 @@ export class VertBarChartComponent implements OnInit {
   barPadding = 64;
 
   colorScheme = {
-    domain: ['#AA84B1', '#9990BE', '#849CC6', '#6CA7CA']
+    domain: chroma.scale(['#97749C','#E2E062']).mode('lch').colors(6)
   };
 
   constructor() {
@@ -38,26 +37,21 @@ export class VertBarChartComponent implements OnInit {
   }
   
   ngOnInit() {
-    //console.log('width: ' + this.elementView.nativeElement.offsetWidth);
     this.barPadding = this.getPadding(this.elementView.nativeElement.offsetWidth);
-    console.log(this.barPadding);
   }
 
   onSelect(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   onResize(event) {
-    //console.log(event.width);
-    //this.barPadding = event.width > 300 ? (Math.min((event.width-300)/200,1) * 48) + 16 : 16;
     this.barPadding = this.getPadding(event.width);
-    console.log(this.barPadding);
   }
 
   getPadding(width: number): number {
     let min_max = {
       minPadding: 16,
-      maxPadding: 72,
+      maxPadding: 96,
       minWidth: 350,
       maxWidth: 450
     };

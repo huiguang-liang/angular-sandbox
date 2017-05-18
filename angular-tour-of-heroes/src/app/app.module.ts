@@ -18,6 +18,10 @@ import { DashboardComponent } from './dashboard.component';
 import { NewHeroComponent } from './new-hero.component';
 import { HeroSearchComponent } from './hero-search.component';
 import { VertBarChartComponent } from './charts/vert-bar-chart.component';
+import { PieBasicChartComponent } from './charts/pie-basic-chart.component';
+import { PieAdvancedChartComponent } from './charts/pie-advanced-chart.component';
+import { PieGridChartComponent } from './charts/pie-grid-chart.component';
+import { LineBasicChartComponent } from './charts/line-basic-chart.component';
 
 // 'Fake' HTTP Server
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -47,9 +51,9 @@ import { HeroEffects } from './effects/hero.effects';
     StoreModule.provideStore(reducer),
     EffectsModule.run(HeroEffects),
     BrowserAnimationsModule,
-    NgxChartsModule
+    NgxChartsModule,
   ],
-  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, VertBarChartComponent ],
+  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, VertBarChartComponent, PieBasicChartComponent, PieAdvancedChartComponent, PieGridChartComponent, LineBasicChartComponent ],
   providers:    [ HeroService, HelperService, HeroActions ],
   bootstrap:    [ AppComponent ]
 })

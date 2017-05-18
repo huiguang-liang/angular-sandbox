@@ -1,21 +1,17 @@
 <div class="col-sm-6 col-md-6 col-lg-4">
   <div class="panel panel-default">
     <div #panel class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(panel.getBoundingClientRect())">
-      <ngx-charts-bar-vertical 
+      <ngx-charts-pie-chart
         [view]="view"
         [scheme]="colorScheme"
         [results]="SINGLE"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
         [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [barPadding]="barPadding"
+        [explodeSlices]="explodeSlices"
+        [labels]="showLabels"
+        [doughnut]="doughnut"
+        [gradient]="gradient"
         (select)="onSelect($event)">
-      </ngx-charts-bar-vertical>
+      </ngx-charts-pie-chart>
     </div>
   </div>
 </div>

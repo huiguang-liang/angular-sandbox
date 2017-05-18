@@ -50,7 +50,8 @@
       'd3-collection': 'npm:d3-collection',
       'd3-time-format': 'npm:d3-time-format',
       'd3-hierarchy': 'npm:d3-hierarchy',
-      '@swimlane/ngx-charts': 'npm:@swimlane/ngx-charts'
+      '@swimlane/ngx-charts': 'npm:@swimlane/ngx-charts',
+      'chroma-js': 'npm:chroma-js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -91,6 +92,9 @@
       'd3-quadtree': { main: 'build/d3-quadtree.js', defaultExtension: 'js' },
       'd3-time': { main: 'build/d3-time.js', defaultExtension: 'js' },
       'd3-collection': { main: 'build/d3-collection.js', defaultExtension: 'js' },
+
+      // for color manipulation
+      'chroma-js': {main: 'chroma.js', defaultExtension: 'js'},
     }
   });
 })(this);

@@ -1,10 +1,10 @@
 <div class="col-sm-6 col-md-6 col-lg-4">
   <div class="panel panel-default">
     <div #panel class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(panel.getBoundingClientRect())">
-      <ngx-charts-bar-vertical 
+      <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
-        [results]="SINGLE"
+        [results]="DATA"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -13,9 +13,11 @@
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
-        [barPadding]="barPadding"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [xAxisTickFormatting]="xAxisTickFormatting"
         (select)="onSelect($event)">
-      </ngx-charts-bar-vertical>
+      </ngx-charts-line-chart>
     </div>
   </div>
 </div>
