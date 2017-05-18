@@ -1,7 +1,7 @@
-<div class="col-sm-6 col-md-4 col-lg-4">
+<div class="col-sm-6 col-md-6 col-lg-4">
   <div class="panel panel-default">
-    <div #div class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(div.getBoundingClientRect())">
-      <ngx-charts-bar-vertical id="test-chart-1"
+    <div #test class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(test.getBoundingClientRect())">
+      <ngx-charts-bar-vertical 
         [view]="view"
         [scheme]="colorScheme"
         [results]="SINGLE"

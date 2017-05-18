@@ -17,7 +17,7 @@ import { HeroesComponent } from './heroes.component';
 import { DashboardComponent } from './dashboard.component';
 import { NewHeroComponent } from './new-hero.component';
 import { HeroSearchComponent } from './hero-search.component';
-import { TestChartComponent } from './charts/test-chart.component';
+import { VertBarChartComponent } from './charts/vert-bar-chart.component';
 
 // 'Fake' HTTP Server
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -49,7 +49,7 @@ import { HeroEffects } from './effects/hero.effects';
     BrowserAnimationsModule,
     NgxChartsModule
   ],
-  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, TestChartComponent ],
+  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, VertBarChartComponent ],
   providers:    [ HeroService, HelperService, HeroActions ],
   bootstrap:    [ AppComponent ]
 })
