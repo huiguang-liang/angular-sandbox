@@ -1,0 +1,24 @@
+<div class="col-sm-12 col-md-6 col-lg-6">
+  <div class="panel panel-default">
+    <div #panel class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(panel.getBoundingClientRect())">
+      <ngx-charts-heat-map
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="DATA"
+        [legend]="showLegend"
+        [gradient]="gradient"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [innerPadding]="innerPadding"
+        [tooltipDisabled]="tooltipDisabled"
+        [xAxisTickFormatting]="xAxisTickFormatting"
+        (select)="select($event)">
+      </ngx-charts-heat-map>
+    </div>
+  </div>
+</div>

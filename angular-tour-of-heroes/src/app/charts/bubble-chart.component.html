@@ -1,0 +1,27 @@
+<div class="col-sm-12 col-md-6 col-lg-6">
+  <div class="panel panel-default">
+    <div #panel class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(panel.getBoundingClientRect())">
+      <ngx-charts-bubble-chart
+        [view]="view"
+        [results]="DATA"
+        [showGridLines]="showGridLines"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [minRadius]="minRadius"
+        [maxRadius]="maxRadius"
+        [xAxisTickFormatting]="xAxisTickFormatting">
+      </ngx-charts-bubble-chart>
+    </div>
+  </div>
+</div>

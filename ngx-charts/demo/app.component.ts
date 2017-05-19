@@ -409,6 +409,7 @@ export class AppComponent implements OnInit {
       });
     }
 
+    console.log(calendarData);
     return calendarData;
   }
 

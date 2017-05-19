@@ -22,6 +22,8 @@ import { PieBasicChartComponent } from './charts/pie-basic-chart.component';
 import { PieAdvancedChartComponent } from './charts/pie-advanced-chart.component';
 import { PieGridChartComponent } from './charts/pie-grid-chart.component';
 import { LineBasicChartComponent } from './charts/line-basic-chart.component';
+import { HeatMapChartComponent } from './charts/heat-map-chart.component';
+import { BubbleChartComponent } from './charts/bubble-chart.component';
 
 // 'Fake' HTTP Server
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -53,7 +55,7 @@ import { HeroEffects } from './effects/hero.effects';
     BrowserAnimationsModule,
     NgxChartsModule,
   ],
-  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, VertBarChartComponent, PieBasicChartComponent, PieAdvancedChartComponent, PieGridChartComponent, LineBasicChartComponent ],
+  declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, NewHeroComponent, HeroSearchComponent, VertBarChartComponent, PieBasicChartComponent, PieAdvancedChartComponent, PieGridChartComponent, LineBasicChartComponent, HeatMapChartComponent, BubbleChartComponent ],
   providers:    [ HeroService, HelperService, HeroActions ],
   bootstrap:    [ AppComponent ]
 })

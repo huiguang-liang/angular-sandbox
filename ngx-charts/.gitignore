@@ -5,3 +5,5 @@ typings
 src/app/**/*.js
 src/app/*.js
 *.js.map
+
+release/**/*.d.ts
