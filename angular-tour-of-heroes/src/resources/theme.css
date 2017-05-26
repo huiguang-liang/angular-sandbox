@@ -145,7 +145,30 @@ body {
   border-radius: 4px;
 }
 
+.options-icon:hover {
+  cursor: pointer;
+  color: hotpink;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-iteration-count: infinite;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
 
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0% {color: #97749C;}
+    50% {color: #E2E062;}
+    100% {color: #97749C;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0% {color: #97749C;}
+    50% {color: #E2E062;}
+    100% {color: #97749C;}
+}
 /*.heroes .text {
   position: relative;
   top: -3px;

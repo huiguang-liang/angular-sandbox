@@ -15,6 +15,7 @@ export class VertBarChartComponent implements OnInit {
   @ViewChild('sortOrderDesc') sortOrderDesc: ElementRef;
 
   DATA: any[];
+  ORIGINAL_DATA: any[];
 
   view = undefined;
 
@@ -29,7 +30,8 @@ export class VertBarChartComponent implements OnInit {
   yAxisLabel = 'Population';
   barPadding = 4;
   
-  sortAsc: boolean;
+  sortAsc = false;
+  collapseExtreme = false;
   
   minShowLegendWindowWidth = 400;
 
@@ -42,6 +44,8 @@ export class VertBarChartComponent implements OnInit {
     // Otherwise, all other graphs that imports the data object will be affected
     this.DATA = JSON.parse(JSON.stringify({SINGLE}));
     this.DATA = this.DATA['SINGLE'];
+    // Keep a copy of the original data
+    this.ORIGINAL_DATA = JSON.parse(JSON.stringify(this.DATA));
   }
   
   ngOnInit() {
@@ -70,7 +74,7 @@ export class VertBarChartComponent implements OnInit {
     return width > min_max.minWidth ? (( Math.min(width-min_max.minWidth, min_max.maxWidth-min_max.minWidth)/ (min_max.maxWidth-min_max.minWidth) ) * ( min_max.maxPadding - min_max.minPadding )) + min_max.minPadding : min_max.minPadding;
   }
 
-  sortBy(field: string, orderAsc: boolean, primer?: (any) => any): ((a: any, b: any) => number) {
+  sortBy(field: string, orderAsc: boolean = false, primer?: (any) => any): ((a: any, b: any) => number) {
     let getValue = primer ? function(x) { return primer(x[field]) } : function(x) { return x[field] };
     let order = orderAsc ? 1 : -1;
     return function(a,b): number {
@@ -78,14 +82,9 @@ export class VertBarChartComponent implements OnInit {
     };
   }
 
-  handleSort(event) {
-    //console.log(event);
-    console.log(event.target.value);
-  }
-
   setSortOrderAsce() {
     this.sortAsc = true;
-    this.setSortOrder();    
+    this.setSortOrder();
   }
 
   setSortOrderDesc() {
@@ -96,5 +95,22 @@ export class VertBarChartComponent implements OnInit {
   setSortOrder() {
     this.DATA.sort(this.sortBy('value', this.sortAsc));
     this.DATA = [...this.DATA];
+  }
+
+  toggleCollapseExtreme() {
+    this.collapseExtreme = !this.collapseExtreme;
+    this.DATA = this.collapseExtreme ? this.collapse(this.DATA, 5) : JSON.parse(JSON.stringify(this.ORIGINAL_DATA));
+    this.DATA = [...this.DATA];
+  }
+
+  collapse(data: any[], retain: number): any[] {
+    let output = JSON.parse(JSON.stringify(data));
+    output.sort(this.sortBy('value', this.sortAsc));
+    let front = output.slice(0,retain);
+    let back = output.slice(retain);
+    let out = {};
+    out['name'] = "Others";
+    out['value'] = back.map(x => x.value).reduce( (a,b) => a+b, 0);
+    return [...front, out];
   }
 }
