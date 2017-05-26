@@ -23,6 +23,8 @@ export class PieBasicChartComponent implements OnInit {
   explodeSlices = false;
   doughnut = false;
   
+  minShowLegendWindowWidth = 400;
+
   colorScheme = {
     domain: chroma.scale(['#97749C','#E2E062']).mode('lch').colors(6)
   };
@@ -32,7 +34,7 @@ export class PieBasicChartComponent implements OnInit {
   }
   
   ngOnInit() {
-    //this.barPadding = this.getPadding(this.elementView.nativeElement.offsetWidth);
+    this.showLegend = this.elementView.nativeElement.offsetWidth > this.minShowLegendWindowWidth ? true : false;
   }
 
   onSelect(event) {
@@ -40,6 +42,6 @@ export class PieBasicChartComponent implements OnInit {
   }
 
   onResize(event) {
-    //this.barPadding = this.getPadding(event.width);
+    this.showLegend = event.width > this.minShowLegendWindowWidth ? true : false;
   }
 }

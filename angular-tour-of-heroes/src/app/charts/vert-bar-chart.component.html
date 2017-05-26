@@ -4,7 +4,7 @@
       <ngx-charts-bar-vertical 
         [view]="view"
         [scheme]="colorScheme"
-        [results]="SINGLE"
+        [results]="DATA"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -17,5 +17,23 @@
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
     </div>
-  </div>
+    <div class="panel-footer">Sort:
+      <span [style.color]="sortAsc ? '#fe9c76':''" (click)="setSortOrderAsce()">
+        <span class="fa fa-sort-amount-asc" style="margin-left: 4px; margin-right: 4px; -ms-transform: rotate(270deg); -webkit-transform: rotate(270deg); transform: rotate(270deg);">
+        </span>
+      </span>
+      <span [style.color]="sortAsc ? '':'#fe9c76'" (click)="setSortOrderDesc()">
+        <span class="fa fa-sort-amount-desc" style="margin-left: 4px; margin-right: 4px; -ms-transform: rotate(270deg); -webkit-transform: rotate(270deg); transform: rotate(270deg);">
+        </span>
+      </span>
+    </div>
+    <!--<div class="panel-footer"><span style="margin-right: 12px;">Sort</span>
+      <label class="radio-inline">
+        <input #radio type="radio" name="sortOrder" value="asce" (click)="handleSort($event)"> Asce
+      </label>
+      <label class="radio-inline">
+        <input #radio type="radio" name="sortOrder" value="desc" checked="checked" (click)="handleSort($event)"> Desc
+      </label>
+    </div>
+  </div>-->
 </div>

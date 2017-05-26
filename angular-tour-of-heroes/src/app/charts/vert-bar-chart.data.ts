@@ -1,15 +1,51 @@
 export const SINGLE: any[] = [
   {
-    "name": "Germany",
-    "value": 8940000
+    "name": "Volunteer Appreciation Night",
+    "value": 8
   },
   {
-    "name": "USA",
-    "value": 5000000
+    "name": "Flag Day",
+    "value": 15
   },
   {
-    "name": "France",
-    "value": 7200000
+    "name": "Rice Distribution",
+    "value": 1
+  },
+  {
+    "name": "Annual Bake Sale",
+    "value": 12
+  },
+  {
+    "name": "Sunshine Walk",
+    "value": 3
+  },
+  {
+    "name": "Charity Auction",
+    "value": 1
+  },
+  {
+    "name": "Annual Singing Competition",
+    "value": 39
+  },
+  {
+    "name": "Spring Cleaning",
+    "value": 1
+  },
+  {
+    "name": "Family Carnival",
+    "value": 1
+  },
+  {
+    "name": "Bingo",
+    "value": 16
+  },
+  {
+    "name": "Karaoke",
+    "value": 15
+  },
+  {
+    "name": "Bowling",
+    "value": 8
   }
 ];
 
