@@ -37,7 +37,15 @@
             <span class="fa fa-square-o"></span>
           </span></ng-template>
         </span>
-        </div>
+        <span style="margin-right: 8px;">Show %:
+          <span *ngIf="showPercentage; else showNumber" (click)="toggleShowPercentage()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #showNumber><span class="options-icon" (click)="toggleShowPercentage()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+      </div>
     </div>
     <!--<div class="panel-footer"><span style="margin-right: 12px;">Sort</span>
       <label class="radio-inline">
