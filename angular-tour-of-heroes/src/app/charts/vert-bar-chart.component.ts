@@ -44,7 +44,7 @@ export class VertBarChartComponent implements OnInit {
     // Otherwise, all other graphs that imports the data object will be affected
     this.DATA = JSON.parse(JSON.stringify({SINGLE}));
     this.DATA = this.DATA['SINGLE'];
-    // Keep a copy of the original data
+    // Deep clone a copy of the original data
     this.ORIGINAL_DATA = JSON.parse(JSON.stringify(this.DATA));
   }
   
@@ -84,23 +84,32 @@ export class VertBarChartComponent implements OnInit {
 
   setSortOrderAsce() {
     this.sortAsc = true;
-    this.setSortOrder();
+    this.setSort();
   }
 
   setSortOrderDesc() {
     this.sortAsc = false;
-    this.setSortOrder();
+    this.setSort();
   }
 
-  setSortOrder() {
-    this.DATA.sort(this.sortBy('value', this.sortAsc));
+  setSort() {
+    this.DATA = this.collapseExtreme ? this.collapse(JSON.parse(JSON.stringify(this.ORIGINAL_DATA)), 5) : this.sortOrder(this.DATA);
+    //this.DATA = this.sortOrder(this.DATA);
+    this.updateGraph();
+  }
+
+  updateGraph() {
     this.DATA = [...this.DATA];
+  }
+
+  sortOrder(data: any[], sortOrder: boolean = this.sortAsc, last?: string): any[] {
+    return data.sort(this.sortBy('value', sortOrder));
   }
 
   toggleCollapseExtreme() {
     this.collapseExtreme = !this.collapseExtreme;
-    this.DATA = this.collapseExtreme ? this.collapse(this.DATA, 5) : JSON.parse(JSON.stringify(this.ORIGINAL_DATA));
-    this.DATA = [...this.DATA];
+    this.DATA = this.collapseExtreme ? this.collapse(this.DATA, 5) : this.sortOrder(JSON.parse(JSON.stringify(this.ORIGINAL_DATA)));
+    this.updateGraph();
   }
 
   collapse(data: any[], retain: number): any[] {
