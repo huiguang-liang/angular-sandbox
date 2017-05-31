@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { DATA } from './line-basic-chart.data';
 import * as chroma from 'chroma-js';
+import * as shape from 'd3-shape';
 
 @Component({
   selector: 'line-basic-chart',
@@ -28,6 +29,8 @@ export class LineBasicChartComponent implements OnInit {
   autoScale = true;
   timeline = false;
   xAxisTickFormatting = this.calendarAxisTickFormatting;
+  curve = shape.curveLinear;
+  showStep = false;
 
   minShowLegendWindowWidth = 400;
 
@@ -48,8 +51,12 @@ export class LineBasicChartComponent implements OnInit {
   }
 
   onResize(event) {
-
     this.showLegend = event.width > this.minShowLegendWindowWidth ? true : false;
+  }
+
+  toggleShowStep() {
+    this.showStep = !this.showStep;
+    this.curve = this.showStep ? shape.curveStep : shape.curveLinear;
   }
 
   calendarAxisTickFormatting(timeString: string): string {

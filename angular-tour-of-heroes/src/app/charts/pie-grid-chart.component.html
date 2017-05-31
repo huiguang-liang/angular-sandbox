@@ -4,9 +4,21 @@
       <ngx-charts-pie-grid
           [view]="view"
           [scheme]="colorScheme"
-          [results]="SINGLE"
+          [results]="DATA"
           (select)="onSelect($event)">
         </ngx-charts-pie-grid>
+    </div>
+    <div class="panel-footer">
+      <div class="form-inline">
+        <span style="margin-right: 8px;">Top:
+          <span *ngIf="collapseExtreme; else notCollapsed" (click)="toggleCollapseExtreme()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #notCollapsed><span class="options-icon" (click)="toggleCollapseExtreme()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+      </div>
     </div>
   </div>
 </div>

@@ -25,7 +25,7 @@ export class VertBarChartComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Activities';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
   barPadding = 4;
@@ -53,8 +53,6 @@ export class VertBarChartComponent implements OnInit {
     this.barPadding = this.getPadding(this.elementView.nativeElement.offsetWidth);
     this.showLegend = this.elementView.nativeElement.offsetWidth > this.minShowLegendWindowWidth ? true : false;
     this.setSortOrderDesc();
-    console.log(this.DATA);
-    console.log(this.toPercentage(this.DATA));
   }
 
   onSelect(event) {
@@ -68,8 +66,8 @@ export class VertBarChartComponent implements OnInit {
 
   getPadding(width: number): number {
     let min_max = {
-      minPadding: 4,
-      maxPadding: 8,
+      minPadding: 12,
+      maxPadding: 18,
       minWidth: 350,
       maxWidth: 450
     };
@@ -87,33 +85,16 @@ export class VertBarChartComponent implements OnInit {
 
   setSortOrderAsce() {
     this.sortAsc = true;
-    //this.setSort();
     this.updateGraph();
   }
 
   setSortOrderDesc() {
     this.sortAsc = false;
-    //this.setSort();
     this.updateGraph();
   }
 
-  // setSort() {
-  //   this.DATA = this.collapseExtreme ? this.collapse(JSON.parse(JSON.stringify(this.ORIGINAL_DATA)), 5) : this.sortOrder(this.DATA);
-  //   this.updateGraph();
-  // }
-
-  updateGraph() {
-    this.DATA = this.transformData(this.getOriginalData());
-    this.DATA = [...this.DATA];
-  }
-
-  // sortOrder(data: any[], sortOrder: boolean = this.sortAsc, last?: string): any[] {
-  //   return data.sort(this.sortBy('value', sortOrder));
-  // }
-
   toggleCollapseExtreme() {
     this.collapseExtreme = !this.collapseExtreme;
-    //this.DATA = this.collapseExtreme ? this.collapse(this.DATA, 5) : this.sortOrder(JSON.parse(JSON.stringify(this.ORIGINAL_DATA)));
     this.updateGraph();
   }
 
@@ -122,13 +103,20 @@ export class VertBarChartComponent implements OnInit {
     this.updateGraph();
   }
 
-  // toggleShowPercentage() {
-  //   this.showPercentage = !this.showPercentage;
-  //   this.DATA = this.showPercentage ? this.toPercentage(this.DATA) : this.DATA;
-  //   this.updateGraph();
-  // }
+  updateGraph() {
+    // Transform the data based on current settings
+    this.DATA = this.transformData(this.getOriginalData());
+    // Update the labels if necessary
+    this.updateLabels();
+    // Force a redraw
+    this.DATA = [...this.DATA];
+  }
 
-  // Need a coherent function that applies data transformation based on current set of settings, e.g. show %, collapse, sorted
+  updateLabels() {
+    this.yAxisLabel = this.showPercentage ? "% of Hours" : "Hours";
+  }
+
+  // Applies data transformation based on current set of settings, e.g. show %, collapse, sorted
   transformData(data: any[]): any[] {
     // apply sort first
     data = data.sort(this.sortBy('value', this.sortAsc));
@@ -141,8 +129,11 @@ export class VertBarChartComponent implements OnInit {
   }
 
   collapse(data: any[], retain: number): any[] {
+    // Deep copy
     let output = JSON.parse(JSON.stringify(data));
+    // Sort the copy by value
     output.sort(this.sortBy('value', this.sortAsc));
+    // Group the "Others" and find its sum
     let front = output.slice(0,retain);
     let back = output.slice(retain);
     let out = {};
@@ -155,7 +146,7 @@ export class VertBarChartComponent implements OnInit {
   toPercentage(data: any[]): any[] {
     // Get total
     let sum = data.map(x => x.value).reduce( (a,b) => a+b );
-    return data.map(x => JSON.parse(`{"name":"${x.name}", "value":${x.value/sum}}`));
+    return data.map(x => JSON.parse(`{"name":"${x.name}", "value":${(x.value/sum)*100}}`));
   }
 
   getOriginalData(): any[] {

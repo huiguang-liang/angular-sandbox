@@ -25,7 +25,7 @@ export class HeatMapChartComponent implements OnInit {
   showXAxisLabel = true;
   showYAxisLabel = true;
   colorScheme = {
-    domain: chroma.scale(['#97749C','#E2E062']).mode('lch').colors(3)
+    domain: ["#97749C","#EA868D"]
   };
 
   xAxisTickFormatting = this.calendarAxisTickFormatting;

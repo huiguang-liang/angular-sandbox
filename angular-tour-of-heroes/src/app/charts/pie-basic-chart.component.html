@@ -4,7 +4,7 @@
       <ngx-charts-pie-chart
         [view]="view"
         [scheme]="colorScheme"
-        [results]="SINGLE"
+        [results]="DATA"
         [legend]="showLegend"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
@@ -12,6 +12,42 @@
         [gradient]="gradient"
         (select)="onSelect($event)">
       </ngx-charts-pie-chart>
+    </div>
+    <div class="panel-footer">
+      <div class="form-inline">
+        <span style="margin-right: 8px;">Top:
+          <span *ngIf="collapseExtreme; else notCollapsed" (click)="toggleCollapseExtreme()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #notCollapsed><span class="options-icon" (click)="toggleCollapseExtreme()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+        <span style="margin-right: 8px;">Show %:
+          <span *ngIf="showPercentage; else showNumber" (click)="toggleShowPercentage()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #showNumber><span class="options-icon" (click)="toggleShowPercentage()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+        <span style="margin-right: 8px;">Explode:
+          <span *ngIf="explodeSlices; else notExploded" (click)="toggleShowExplode()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #notExploded><span class="options-icon" (click)="toggleShowExplode()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+        <span style="margin-right: 8px;">Doughnut:
+          <span *ngIf="doughnut; else notDoughnut" (click)="toggleShowDoughnut()" class="options-icon">
+            <span class="fa fa-circle-o" ></span>
+          </span>
+          <ng-template #notDoughnut><span class="options-icon" (click)="toggleShowDoughnut()">
+            <span class="fa fa-circle"></span>
+          </span></ng-template>
+        </span>
+      </div>
     </div>
   </div>
 </div>

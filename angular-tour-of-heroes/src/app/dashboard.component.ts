@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-      this.heroesSub = this.heroesState.subscribe(heroes => this.topHeroes = heroes.slice(0,4));
+    this.heroesSub = this.heroesState.subscribe(heroes => this.topHeroes = heroes.slice(0,4));
     this.store.dispatch( this.heroActions.getHeroes() );
   }
 

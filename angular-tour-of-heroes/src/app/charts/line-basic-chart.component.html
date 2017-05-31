@@ -15,9 +15,22 @@
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
         [timeline]="timeline"
+        [curve]="curve"
         [xAxisTickFormatting]="xAxisTickFormatting"
         (select)="onSelect($event)">
       </ngx-charts-line-chart>
+    </div>
+    <div class="panel-footer">
+      <div class="form-inline">
+        <span style="margin-right: 8px;">Step:
+          <span *ngIf="showStep; else notStep" (click)="toggleShowStep()" class="options-icon">
+            <span class="fa fa-check-square-o" ></span>
+          </span>
+          <ng-template #notStep><span class="options-icon" (click)="toggleShowStep()">
+            <span class="fa fa-square-o"></span>
+          </span></ng-template>
+        </span>
+      </div>
     </div>
   </div>
 </div>

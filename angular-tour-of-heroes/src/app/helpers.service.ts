@@ -30,4 +30,17 @@ export class HelperService {
   isSecondLastItem(index: number, length: number): boolean {
     return index == length - 2;
   }
+
+  /**
+   * Generic sorting comparator
+   * @Input: Takes in the name of the field of an object, order of sort, primer function
+   * @Output: Returns -1, 1 or 0
+   */
+  sortBy(field: string, orderAsc: boolean = false, primer?: (any) => any): ((a: any, b: any) => number) {
+    let getValue = primer ? function(x) { return primer(x[field]) } : function(x) { return x[field] };
+    let order = orderAsc ? 1 : -1;
+    return function(a,b): number {
+      return getValue(a) === getValue(b) ? 0 : getValue(a) > getValue(b) ? order : order * -1;
+    };
+  }
 }
