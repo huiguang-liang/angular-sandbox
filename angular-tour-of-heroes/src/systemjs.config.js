@@ -51,7 +51,8 @@
       'd3-time-format': 'npm:d3-time-format',
       'd3-hierarchy': 'npm:d3-hierarchy',
       '@swimlane/ngx-charts': 'npm:@swimlane/ngx-charts',
-      'chroma-js': 'npm:chroma-js'
+      'chroma-js': 'npm:chroma-js',
+      'simplemde': 'npm:simplemde'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -95,6 +96,9 @@
 
       // for color manipulation
       'chroma-js': {main: 'chroma.js', defaultExtension: 'js'},
+
+      // for simplemde
+      'simplemde': {main: 'dist/simplemde.min.js', defaultExtension: 'js'}
     }
   });
 })(this);
