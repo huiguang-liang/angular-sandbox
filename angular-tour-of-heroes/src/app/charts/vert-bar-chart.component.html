@@ -1,7 +1,7 @@
 <div class="col-sm-6 col-md-6 col-lg-4">
   <div class="panel panel-default">
     <div #panel class="panel-body" style="display: flex; justify-content: center; align-items: center; height: 350px;" (window:resize)="onResize(panel.getBoundingClientRect())">
-      <ngx-charts-bar-vertical 
+      <ngx-charts-bar-vertical #vertBarChart
         [view]="view"
         [scheme]="colorScheme"
         [results]="DATA"
@@ -44,6 +44,11 @@
           <ng-template #showNumber><span class="options-icon" (click)="toggleShowPercentage()">
             <span class="fa fa-square-o"></span>
           </span></ng-template>
+        </span>
+        <span style="margin-right: 8px;">
+          <span (click)="saveAsSvg()" class="options-icon">
+            <span class="fa fa-file-code-o"></span>
+          </span>
         </span>
       </div>
     </div>

@@ -52,7 +52,10 @@
       'd3-hierarchy': 'npm:d3-hierarchy',
       '@swimlane/ngx-charts': 'npm:@swimlane/ngx-charts',
       'chroma-js': 'npm:chroma-js',
-      'simplemde': 'npm:simplemde'
+      'simplemde': 'npm:simplemde',
+      'svgsaver': 'npm:svgsaver',
+      'computed-styles': 'npm:computed-styles',
+      'file-saver': 'npm:file-saver',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -98,7 +101,16 @@
       'chroma-js': {main: 'chroma.js', defaultExtension: 'js'},
 
       // for simplemde
-      'simplemde': {main: 'dist/simplemde.min.js', defaultExtension: 'js'}
+      'simplemde': {main: 'dist/simplemde.min.js', defaultExtension: 'js'},
+
+      // for svgsaver
+      'svgsaver': {main: 'browser.js', defaultExtension: 'js'},
+
+      // for computed-styles
+      'computed-styles': {main: 'lib/index.js', defaultExtension: 'js'},
+
+      // for file-saver
+      'file-saver': {main: 'FileSaver.js', defaultExtension: 'js'},
     }
   });
 })(this);

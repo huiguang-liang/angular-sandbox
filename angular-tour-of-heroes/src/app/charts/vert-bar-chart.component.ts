@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { SINGLE } from './vert-bar-chart.data';
 import * as chroma from 'chroma-js';
+import * as SvgSaver from 'svgsaver';
 
 @Component({
   selector: 'vert-bar-chart',
@@ -11,8 +12,9 @@ import * as chroma from 'chroma-js';
 export class VertBarChartComponent implements OnInit {
 
   @ViewChild('panel') elementView: ElementRef;
-  @ViewChild('sortOrderAsc') sortOrderAsc: ElementRef;
-  @ViewChild('sortOrderDesc') sortOrderDesc: ElementRef;
+  //@ViewChild('sortOrderAsc') sortOrderAsc: ElementRef;
+  //@ViewChild('sortOrderDesc') sortOrderDesc: ElementRef;
+  @ViewChild('vertBarChart') vertBarChart: ElementRef;
 
   DATA: any[];
   ORIGINAL_DATA: any[];
@@ -40,6 +42,8 @@ export class VertBarChartComponent implements OnInit {
     domain: chroma.scale(['#97749C','#E2E062']).mode('lch').colors(6)
   };
 
+  svgSaver = new SvgSaver();
+
   constructor() {
     // Instead of manipulating the data object imported directly, do a deep copy and sort the copy,
     // Otherwise, all other graphs that imports the data object will be affected
@@ -49,6 +53,10 @@ export class VertBarChartComponent implements OnInit {
     this.ORIGINAL_DATA = JSON.parse(JSON.stringify(this.DATA));
   }
   
+  saveAsSvg() {
+    this.svgSaver.asSvg(this.vertBarChart.chartElement.nativeElement);
+  }
+
   ngOnInit() {
     this.barPadding = this.getPadding(this.elementView.nativeElement.offsetWidth);
     this.showLegend = this.elementView.nativeElement.offsetWidth > this.minShowLegendWindowWidth ? true : false;

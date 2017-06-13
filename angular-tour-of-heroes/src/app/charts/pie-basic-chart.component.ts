@@ -3,6 +3,7 @@ import { ElementRef, ViewChild } from '@angular/core';
 import { SINGLE } from './vert-bar-chart.data';
 import * as chroma from 'chroma-js';
 import { HelperService } from '../helpers.service';
+import * as SvgSaver from 'svgsaver';
 
 @Component({
   selector: 'pie-basic-chart',
@@ -12,6 +13,7 @@ import { HelperService } from '../helpers.service';
 export class PieBasicChartComponent implements OnInit {
 
   @ViewChild('panel') elementView: ElementRef;
+  @ViewChild('pieBasicChart') pieBasicChart: ElementRef;
 
   DATA: any[];
   ORIGINAL_DATA: any[];
@@ -34,6 +36,8 @@ export class PieBasicChartComponent implements OnInit {
     domain: chroma.scale(['#97749C','#E2E062']).mode('lch').colors(6)
   };
 
+  svgSaver = new SvgSaver();
+
   constructor(private helperService: HelperService) {
     // Instead of manipulating the data object imported directly, do a deep copy and sort the copy,
     // Otherwise, all other graphs that imports the data object will be affected
@@ -45,6 +49,10 @@ export class PieBasicChartComponent implements OnInit {
     this.DATA = this.DATA.sort(this.helperService.sortBy('value', this.sortAsc));
   }
   
+  saveAsSvg() {
+    this.svgSaver.asSvg(this.pieBasicChart.chartElement.nativeElement);
+  }
+
   ngOnInit() {
     this.showLegend = this.elementView.nativeElement.offsetWidth > this.minShowLegendWindowWidth ? true : false;
   }
