@@ -13,7 +13,7 @@ import * as SvgSaver from 'svgsaver';
 export class PieBasicChartComponent implements OnInit {
 
   @ViewChild('panel') elementView: ElementRef;
-  @ViewChild('pieBasicChart') pieBasicChart: ElementRef;
+  @ViewChild('pieBasicChart') pieBasicChart;
 
   DATA: any[];
   ORIGINAL_DATA: any[];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementRef, ViewChild } from '@angular/core';
+import { ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { SINGLE } from './vert-bar-chart.data';
+import { BaseChartComponent } from '@swimlane/ngx-charts';
 import * as chroma from 'chroma-js';
 import * as SvgSaver from 'svgsaver';
 
@@ -14,7 +15,7 @@ export class VertBarChartComponent implements OnInit {
   @ViewChild('panel') elementView: ElementRef;
   //@ViewChild('sortOrderAsc') sortOrderAsc: ElementRef;
   //@ViewChild('sortOrderDesc') sortOrderDesc: ElementRef;
-  @ViewChild('vertBarChart') vertBarChart: ElementRef;
+  @ViewChild('vertBarChart') vertBarChart;
 
   DATA: any[];
   ORIGINAL_DATA: any[];
@@ -44,7 +45,7 @@ export class VertBarChartComponent implements OnInit {
 
   svgSaver = new SvgSaver();
 
-  constructor() {
+  constructor(private vertBarChartRenderer: Renderer2) {
     // Instead of manipulating the data object imported directly, do a deep copy and sort the copy,
     // Otherwise, all other graphs that imports the data object will be affected
     this.DATA = JSON.parse(JSON.stringify({SINGLE}));
@@ -61,6 +62,11 @@ export class VertBarChartComponent implements OnInit {
     this.barPadding = this.getPadding(this.elementView.nativeElement.offsetWidth);
     this.showLegend = this.elementView.nativeElement.offsetWidth > this.minShowLegendWindowWidth ? true : false;
     this.setSortOrderDesc();
+  }
+
+  ngAfterViewInit() {
+    //console.log(this.vertBarChart.nativeElement); 
+    //this.el.nativeElement.focus();
   }
 
   onSelect(event) {
