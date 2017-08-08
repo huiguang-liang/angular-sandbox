@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 // customize fonts
-$font-family-sans-serif: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-sans-serif: -apple-system, "Roboto", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
 // customize size
 $font-size-base: 0.875rem; // Assumes the browser default, typically `16px`
@@ -10,6 +10,26 @@ $font-size-sm:   .75rem;
 $font-size-xs:   .625rem;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.pad-none {
+  padding: 0rem;
+}
+
+.pad-bottom {
+  padding-bottom: 1rem;
+}
+
+.pad-all {
+  padding: 1rem;
+}
+
+.margin-none {
+  margin: 0rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
 
 .sidebar-wrapper {
   padding-top: 0.75rem;
