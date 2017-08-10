@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SidebarModule } from './components/sidebar/sidebar.module';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { D3graphModule } from './components/content/d3graph/d3graph.module';
 import { AppRoutingModule } from './app.routing.module';
 /*
 import { OverviewModule } from './components/content/overview/overview.module';
@@ -20,6 +21,7 @@ import { ExportModule } from './components/content/export/export.module';
     BrowserModule,
     SidebarModule,
     NavbarModule,
+    D3graphModule,
     AppRoutingModule,
     /*
     OverviewModule,
