@@ -1,0 +1,95 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Data Input Management</h4>
+          </div>
+          <!--
+          <div id="loader">
+            <span *ngIf="flag"><img src="assets/img/loader-preview.svg" alt="loading"></span>
+          </div>
+          <div class="container-fluid">
+            <div class="inputdata">
+              <form id="location_form">
+                <br><br>
+                <h6>Please select the target device gateway</h6>
+                <ss-multiselect-dropdown name="multiselect" [options]="myOptions" [texts]="myTexts" [(ngModel)]="optionsModel" [settings]="mySettings"
+                  (ngModelChange)="onChange($event)">
+                </ss-multiselect-dropdown><br>
+              </form>
+              <br>
+              <form id="date_form" method="get">
+                <h6>Please Choose the target date</h6>
+                <div class="input-group">
+                  <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate" [(ngModel)]="model"
+                    [options]="dateOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)" />
+                  <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                                            <i class="pe-7s-close-circle"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                            <i class="pe-7s-date"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default" (click)="onDateRetrieved()">
+                                            confirm
+                                        </button>
+                                    </span>
+                </div>
+              </form>
+              <br>
+              <button class="btn btn-info btn-fill" (click)="getInputData()">Show Chart</button>
+              <br><br>
+            </div>
+          </div>
+          -->
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Time Series Chart</h4>
+            <p class="category">24 Hours performance</p>
+          </div>
+          <div class="content">
+            <div class="test-chart"></div>
+            <div class="footer">
+              <div class="legend" style="display: flex; align-items: center; justify-content: center;">
+                <div><i class="fa fa-circle" [style.color]="colors.kitchen"></i> Kitchen</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.living_room"></i> Living Room</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.bathroom"></i> Toilet Bathroom</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.bedroom"></i> Master Bedroom</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.main_door"></i> Main Door</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.spare_room"></i> Spare Room</div>
+                <div style="margin-left: 5px;"><i class="fa fa-circle" [style.color]="colors.med_box"></i> Medbox</div>
+              </div>
+              <hr>
+            </div>
+          </div>
+          <!--
+          <div class="text-center">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+            </ul>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
