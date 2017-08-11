@@ -11,9 +11,6 @@ import 'rxjs/add/operator/map';
 
 export class D3graphComponent implements OnInit {
 
-  // Generate a color scheme
-  //colorScheme = chroma.scale('Spectral').colors(7);
-
   constructor() { }
 
   ngOnInit() {
@@ -27,8 +24,12 @@ export class D3graphComponent implements OnInit {
 
   drawDemoChart(divElement) {
     // Setup the chart margins
-    var margin = { top: 5, right: 10, bottom: 5, left: 10};
+    var margin = { top: 20, right: 30, bottom: 30, left: 40};
     var innerGraphMargin = {left: 10, right: 10};
+
+    // Setup the base chart color
+    var baseColor = chroma.scale('Spectral').colors(3)[2];
+    var axesColor = chroma(baseColor).darken(2);
 
     // Find the enclosing div element dimensions
     var divElementWidth = parseInt(divElement.style("width"));
@@ -44,20 +45,21 @@ export class D3graphComponent implements OnInit {
       .attr("height", chartHeight);
     
     var graphHeight = chartHeight;
-    var graphWidth = chartWidth - margin.left - margin.right;
+    var graphWidth = chartWidth;
 
     // Compute the mapping function for horizontal axis from input domain to output range
     var xScale = d3.scaleTime()
-      .domain([0, chartWidth])
+      .domain([0, graphWidth])
       // Leave margins on the left and right so that axis labels don't get chopped off
-      .range([innerGraphMargin.left, graphWidth - innerGraphMargin.right]);
+      .range([margin.left, graphWidth - margin.right]);
 
     /*
      Compute the mapping function for vertical axis from input domain to output range.
      Note that the range goes from graphHeight to 0, because the pixel origin is top-left, instead of bottom-left
      */
     var yScale = d3.scaleLinear()
-      .range([graphHeight, 0])
+      // Leave margins on the top and bottom so that axis labels don't get chopped off
+      .range([graphHeight - margin.bottom, margin.top])
       .nice();
 
     // Define the xAxis
@@ -77,7 +79,8 @@ export class D3graphComponent implements OnInit {
       var xExtent: number[] = dataset.map(d => d['date']);
       var yExtent: number[] = dataset.map(d => d['close']);
       xScale.domain(d3.extent(xExtent));
-      yScale.domain(d3.extent(yExtent));
+      // Add some allowances to the y-axis extent
+      yScale.domain([d3.extent(yExtent)[0]-10, d3.extent(yExtent)[1]+10]).nice();
       
       container.selectAll(".demoChart")
         // Bind to the dataset
@@ -105,71 +108,57 @@ export class D3graphComponent implements OnInit {
           // Set the class attribute
           .attr('class', 'path')
           // Set the stroke attributes
-          .attr('stroke', chroma(chroma.scale('Spectral').colors(1)[0]).darken(2))
+          .attr('stroke', baseColor)
           .attr('stroke-width', 1.5)
           // Set the fill attributes
-          .attr('opacity', 0.8)
-          .style('fill', chroma.scale('Spectral').colors(1)[0])
+          .attr('opacity', 1.0)
+          .style('fill', 'none')
           // Populate the actual path, see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d
-            .attr('d', d3.area()
-              // Set the curve interpolation type
-              .curve(d3.curveBasis)
-              // How to map the horizontal values
-              .x( function(d, index, data) { console.log(xScale(d['date'])); return xScale(d['date']); } )
-              .y0( function(d, index, data) { console.log(yScale(d['close'])); return yScale(d['close']); } )
-              .y1( function(d, index, data) { return graphHeight; } )
-              /*
-              How to map the vertical values, note that y0 is a positive displacement from the graphMidPoint,
-              which translates into a downward displacement (since the pixel origin is top-left instead of bottom-left)
-              */
-              //.y0( function(d, index, data) { return graphMidPoint + yScale(flatten(d)); } )
-              //.y1( function(d, index, data) { return graphMidPoint - yScale(flatten(d)); } )
-            );
-          // Draw the x Axes
+          // .attr('d', d3.area()
+          //   // Set the curve interpolation type
+          //   .curve(d3.curveBasis)
+          //   // How to map the horizontal values
+          //   .x( function(d, index, data) { return xScale(d['date']); } )
+          //   .y0( function(d, index, data) { return yScale(d['close']); } )
+          //   .y1( function(d, index, data) { return graphHeight - margin.bottom; } )
+          // );
+          .attr('d', d3.line()
+            .x(d => xScale(d['date']))
+            .y(d => yScale(d['close']))
+          )
+          
+          // Draw the x Axis
           d3.select(this).append('g')
-            .attr('class', 'axis')
+            .attr('class', 'x-axis')
             // Shift the axis from the origin to the element mid-point
-            .attr('transform', 'translate(0,' + 0 + ')')
+            .attr('transform', 'translate(0,' + (graphHeight - margin.bottom) + ')')
             .call(xAxis)
-          ;
           // Style the x Axes
-          d3.select(this)
-            .select('.axis path')
-            .attr('stroke', chroma(chroma.scale('Spectral').colors(1)[0]).darken(2))
-            .attr('shape-rendering', 'crispEdges');
-          d3.select(this)
-            .selectAll('.axis .tick line')
-            .attr('stroke', chroma(chroma.scale('Spectral').colors(1)[0]).darken(2))
-            .attr('shape-rendering', 'crispEdges');
-          d3.select(this)
-            .selectAll('.axis .tick text')
-            .attr('fill', chroma(chroma.scale('Spectral').colors(1)[0]).darken(2));
+          d3.select(this).select('.x-axis .domain')
+            .attr('stroke', axesColor)
+            .attr('shape-rendering', 'crispEdges')
+          d3.select(this).selectAll('.x-axis .tick line')
+            .attr('stroke', axesColor)
+            .attr('shape-rendering', 'crispEdges')
+          d3.select(this).selectAll('.x-axis .tick text')
+            .attr('fill', axesColor);
+          
           // Draw the y Axis
           d3.select(this).append('g')
-            .attr('class', 'axis')
+            .attr('class', 'y-axis')
             // Shift the axis from the origin to the element mid-point
-            .attr('transform', 'translate(' + 20 + ', 0)')
+            .attr('transform', 'translate(' + margin.left + ', 0)')
             .call(yAxis)
-          ;
+          // Style the y Axes
+          d3.select(this).select('.y-axis .domain')
+            .attr('stroke', axesColor)
+            .attr('shape-rendering', 'crispEdges')
+          d3.select(this).selectAll('.y-axis .tick line')
+            .attr('stroke', axesColor)
+            .attr('shape-rendering', 'crispEdges')
+          d3.select(this).selectAll('.y-axis .tick text')
+            .attr('fill', axesColor);
         })
-        /*
-        // Draw the SVG element
-        .append('svg')
-        // Draw the path element
-        .append('path')
-        // Set the class attribute
-        .attr('class', 'path')
-        // Set the stroke attributes
-        .attr('stroke', chroma(chroma.scale('Spectral').colors(1)[0]).darken(2))
-        .attr('stroke-width', 1.5)
-        // Set the fill attributes
-        .attr('opacity', 0.8)
-        .style('fill', chroma.scale('Spectral').colors(1)[0])
-        
-        // Enter into the dataset and repeat the below for every subset
-        .enter()
-        .attr('d', line)
-        */
     });
   }
 }

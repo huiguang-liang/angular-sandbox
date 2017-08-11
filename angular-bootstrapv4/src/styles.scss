@@ -39,3 +39,7 @@ $font-size-xs:   .625rem;
   border-radius: 0.25rem;
   background-color: #f7f7f7;
 }
+
+.test-chart svg g {
+  font-size: $font-size-base;
+}
