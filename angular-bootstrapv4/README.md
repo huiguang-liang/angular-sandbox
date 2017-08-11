@@ -2,9 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
 
+To run this, it is assumed you have Node.js (>= `v6.11.2`) and `npm` (>= `v5.3.0`) installed.
+
+1. Then, install the dependencies listed in `package.json` by simply typing `npm install`.
+2. Run with `ng serve`.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+If you want to specify a particular interface/port to listen on, you can run the following:
+```
+ng serve --host <ip> --port <number>
+```
 
 ## Code scaffolding
 
