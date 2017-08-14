@@ -1,1 +1,5 @@
-<div class="test-chart"></div>
+<div class=panel>
+  <div #panel (window:resize)="onResize(panel.getBoundingClientRect())">
+    <div class="test-chart"></div>
+  </div>
+</div>

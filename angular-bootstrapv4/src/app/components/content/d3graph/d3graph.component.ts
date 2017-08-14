@@ -11,6 +11,8 @@ import 'rxjs/add/operator/map';
 
 export class D3graphComponent implements OnInit {
 
+  lastResized = Date.now();
+
   constructor() { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class D3graphComponent implements OnInit {
 
   drawDemoChart(divElement) {
     // Setup the chart margins
-    var margin = { top: 20, right: 30, bottom: 30, left: 40};
+    var margin = { top: 20, right: 30, bottom: 40, left: 60};
     var innerGraphMargin = {left: 10, right: 10};
 
     // Setup the base chart color
@@ -81,7 +83,11 @@ export class D3graphComponent implements OnInit {
       xScale.domain(d3.extent(xExtent));
       // Add some allowances to the y-axis extent
       yScale.domain([d3.extent(yExtent)[0]-10, d3.extent(yExtent)[1]+10]).nice();
-      
+
+      // Update the axes ticks
+      var xAxisTicks = chartWidth > 600 ? null : 5;
+      xAxis.ticks(xAxisTicks);
+
       container.selectAll(".demoChart")
         // Bind to the dataset
         .data([dataset])
@@ -123,6 +129,7 @@ export class D3graphComponent implements OnInit {
           //   .y1( function(d, index, data) { return graphHeight - margin.bottom; } )
           // );
           .attr('d', d3.line()
+            .curve(d3.curveLinear)
             .x(d => xScale(d['date']))
             .y(d => yScale(d['close']))
           )
@@ -158,7 +165,30 @@ export class D3graphComponent implements OnInit {
             .attr('shape-rendering', 'crispEdges')
           d3.select(this).selectAll('.y-axis .tick text')
             .attr('fill', axesColor);
+
+          d3.select(this).append('g')
+            .attr('class', 'axis-labels')
+              .append('text')
+              .attr('transform', 'translate(' + (chartWidth/2) + ', ' + (chartHeight) + ')')
+              .style('text-anchor', 'middle')
+              .text('Date')
+          d3.select(this).select('.axis-labels')
+            .append('text')
+            // .attr('transform', 'rotate(-90)')
+            .attr('transform', 'translate(' + (10) + ', ' + (chartHeight/2) + ') rotate(-90)')
+            .style("text-anchor", "middle")
+            .text("Closing Value")
         })
     });
+  }
+
+  onResize(event) {
+    //console.log(event.width);
+    if ((Date.now() - this.lastResized) > 500) {
+      console.log(event.width);
+
+      this.displayChart();
+      this.lastResized = Date.now();
+    }
   }
 }
