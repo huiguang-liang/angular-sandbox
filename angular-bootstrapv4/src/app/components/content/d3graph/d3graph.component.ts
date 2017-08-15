@@ -26,7 +26,7 @@ export class D3graphComponent implements OnInit {
 
   drawDemoChart(divElement) {
     // Setup the chart margins
-    var margin = { top: 20, right: 30, bottom: 40, left: 60};
+    var margin = { top: 20, right: 20, bottom: 40, left: 40};
     var innerGraphMargin = {left: 10, right: 10};
 
     // Setup the base chart color
@@ -166,18 +166,22 @@ export class D3graphComponent implements OnInit {
           d3.select(this).selectAll('.y-axis .tick text')
             .attr('fill', axesColor);
 
+          // Create the x-axis label
           d3.select(this).append('g')
             .attr('class', 'axis-labels')
               .append('text')
-              .attr('transform', 'translate(' + (chartWidth/2) + ', ' + (chartHeight) + ')')
-              .style('text-anchor', 'middle')
+              .attr('transform', 'translate(' + (chartWidth - margin.right) + ', ' + (chartHeight - margin.bottom - 10) + ')')
+              .style('text-anchor', 'end')
               .text('Date')
+          // Create the y-axis label
           d3.select(this).select('.axis-labels')
             .append('text')
             // .attr('transform', 'rotate(-90)')
-            .attr('transform', 'translate(' + (10) + ', ' + (chartHeight/2) + ') rotate(-90)')
-            .style("text-anchor", "middle")
-            .text("Closing Value")
+            .attr('transform', 'translate(' + (margin.left + 20) + ', ' + (margin.top) + ') rotate(-90)')
+            .style("text-anchor", "end")
+            .text("Closing Value ($)")
+          
+          
         })
     });
   }
