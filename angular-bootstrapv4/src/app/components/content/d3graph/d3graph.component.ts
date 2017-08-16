@@ -180,8 +180,24 @@ export class D3graphComponent implements OnInit {
             .attr('transform', 'translate(' + (margin.left + 20) + ', ' + (margin.top) + ') rotate(-90)')
             .style("text-anchor", "end")
             .text("Closing Value ($)")
-          
-          
+
+          let legend = d3.select(this).append('g');
+          legend.attr('class', 'legend')
+            .append('text')
+            //.attr('transform', 'translate(' + (margin.left + 50) + ', ' + (margin.top + 20) + ')')
+            .style('text-anchor', 'start')
+            .text('YHOO');
+          let boundingBox = (legend.node() as any).getBBox();
+          legend.append('rect')
+          .attr("x", boundingBox.x - 5)
+          .attr("y", boundingBox.y - 5)
+          .attr("width", boundingBox.width + 10)
+          .attr("height", boundingBox.height + 10)
+          .style("fill", "#ccc")
+          .style("fill-opacity", ".3")
+          .style("stroke", "#666")
+          .style("stroke-width", "1.5px");
+          legend.attr('transform', 'translate(' + (margin.left + 50) + ', ' + (margin.top + 10) + ')');
         })
     });
   }
