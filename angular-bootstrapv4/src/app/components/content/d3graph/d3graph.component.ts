@@ -176,28 +176,148 @@ export class D3graphComponent implements OnInit {
           // Create the y-axis label
           d3.select(this).select('.axis-labels')
             .append('text')
-            // .attr('transform', 'rotate(-90)')
             .attr('transform', 'translate(' + (margin.left + 20) + ', ' + (margin.top) + ') rotate(-90)')
             .style("text-anchor", "end")
             .text("Closing Value ($)")
 
+          // Draw the legend
           let legend = d3.select(this).append('g');
+          // Displace the whole legend
+          legend.attr('transform', 'translate(' + (margin.left + 80) + ', ' + (margin.top + 20) + ')');
           legend.attr('class', 'legend')
             .append('text')
-            //.attr('transform', 'translate(' + (margin.left + 50) + ', ' + (margin.top + 20) + ')')
             .style('text-anchor', 'start')
             .text('YHOO');
           let boundingBox = (legend.node() as any).getBBox();
+          // Draw the reference line
+          legend.append('line')
+            .attr("x1", boundingBox.x - 30)
+            .attr("x2", boundingBox.x - 10)
+            .attr("y1", boundingBox.y + (boundingBox.height/2))
+            .attr("y2", boundingBox.y + (boundingBox.height/2))
+            .attr('stroke', axesColor)
+          // Draw the bounding rectangle
+          boundingBox = (legend.node() as any).getBBox();
+          let padding = 10;
           legend.append('rect')
-          .attr("x", boundingBox.x - 5)
-          .attr("y", boundingBox.y - 5)
-          .attr("width", boundingBox.width + 10)
-          .attr("height", boundingBox.height + 10)
-          .style("fill", "#ccc")
-          .style("fill-opacity", ".3")
-          .style("stroke", "#666")
-          .style("stroke-width", "1.5px");
-          legend.attr('transform', 'translate(' + (margin.left + 50) + ', ' + (margin.top + 10) + ')');
+            .attr("x", boundingBox.x - padding)
+            .attr("y", boundingBox.y - padding)
+            .attr("width", boundingBox.width + (padding * 2))
+            .attr("height", boundingBox.height + (padding * 2))
+            .attr('stroke', axesColor)
+            .attr('shape-rendering', 'crispEdges')
+            .style('fill', 'none');
+          // Draw the marks
+          boundingBox = (legend.node() as any).getBBox();
+          legend.append('line')
+            .attr('x1', boundingBox.x - 5)
+            .attr('x2', boundingBox.x + 5)
+            .attr('y1', boundingBox.y)
+            .attr('y2', boundingBox.y)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          legend.append('line')
+            .attr('x1', boundingBox.x)
+            .attr('x2', boundingBox.x)
+            .attr('y1', boundingBox.y - 5)
+            .attr('y2', boundingBox.y + 5)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          
+          legend.append('line')
+            .attr('x1', boundingBox.x - 5)
+            .attr('x2', boundingBox.x + 5)
+            .attr('y1', boundingBox.y + boundingBox.height)
+            .attr('y2', boundingBox.y + boundingBox.height)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          legend.append('line')
+            .attr('x1', boundingBox.x)
+            .attr('x2', boundingBox.x)
+            .attr('y1', boundingBox.y + boundingBox.height - 5)
+            .attr('y2', boundingBox.y + boundingBox.height + 5)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+
+          legend.append('line')
+            .attr('x1', boundingBox.x + (boundingBox.width / 2) - 5)
+            .attr('x2', boundingBox.x + (boundingBox.width / 2) + 5)
+            .attr('y1', boundingBox.y)
+            .attr('y2', boundingBox.y)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          legend.append('line')
+            .attr('x1', boundingBox.x + (boundingBox.width / 2) )
+            .attr('x2', boundingBox.x + (boundingBox.width / 2) )
+            .attr('y1', boundingBox.y - 5)
+            .attr('y2', boundingBox.y + 5)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          
+          legend.append('line')
+            .attr('x1', boundingBox.x + (boundingBox.width / 2) - 5)
+            .attr('x2', boundingBox.x + (boundingBox.width / 2) + 5)
+            .attr('y1', boundingBox.y + boundingBox.height)
+            .attr('y2', boundingBox.y + boundingBox.height)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+          legend.append('line')
+            .attr('x1', boundingBox.x + (boundingBox.width / 2) )
+            .attr('x2', boundingBox.x + (boundingBox.width / 2) )
+            .attr('y1', boundingBox.y + boundingBox.height - 5)
+            .attr('y2', boundingBox.y + boundingBox.height + 5)
+            .attr('stroke', 'red')
+            .attr('shape-rendering', 'crispEdges')
+
+            // Label the legend
+          boundingBox = (legend.node() as any).getBBox();
+
+          /*
+          console.log(boundingBox);
+          legend.append('rect')
+            .attr('x', boundingBox.x)
+            .attr('y', boundingBox.y)
+            .attr('width', boundingBox.width)
+            .attr('height', boundingBox.height)
+            .style('fill', 'none');
+          */
+
+          /*
+          legend.append('text')
+            .attr('class', 'legend-label')
+            // .attr('transform', 'translate(' + 0 + ', ' + (-1 * boundingBox.height/2) + ')')
+            .style('text-anchor', 'middle')
+            .text('Legend');
+          // Compute the dimension of the label
+          let legendLabelBoundingBox = (d3.select(this).select('.legend-label').node() as any).getBBox();
+          legend.append('rect')
+          .attr('x', legendLabelBoundingBox.x)
+          .attr('y', legendLabelBoundingBox.y)
+          .attr('width', legendLabelBoundingBox.width)
+          .attr('height', legendLabelBoundingBox.height)
+          .style('fill', 'none')
+          .attr('stroke', axesColor)
+          */
+
+          // // Remove the label
+          // d3.select(this).select('legend-label').remove();
+          // // Draw the background rectangle for the label
+          // legend.append('rect')
+          //   .attr('x', legendLabelBoundingBox.x - 1)
+          //   .attr('y', legendLabelBoundingBox.y - 1)
+          //   .attr('width', legendLabelBoundingBox.width + 2)
+          //   .attr('height', legendLabelBoundingBox.height + 2)
+          //   .attr('transform', 'translate(' + 0 + ', ' + (-1 * boundingBox.height/2) + ')')
+          //   .attr('stroke', 'none')
+          //   .style('fill', '#ffffff')
+          //   .attr('z', -1);
+          // // Finally, add back the legend label
+          // legend.append('text')
+          // .attr('class', 'legend-label')
+          // .attr('transform', 'translate(' + 0 + ', ' + (-1 * boundingBox.height/2) + ')')
+          // .style('text-anchor', 'middle')
+          // .text('Legend');
+          
         })
     });
   }
