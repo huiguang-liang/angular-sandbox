@@ -207,8 +207,11 @@ export class D3graphComponent implements OnInit {
             .attr('stroke', axesColor)
             .attr('shape-rendering', 'crispEdges')
             .style('fill', 'none');
+          
           // Draw the marks
           boundingBox = (legend.node() as any).getBBox();
+
+          // Left marks
           legend.append('line')
             .attr('x1', boundingBox.x - 5)
             .attr('x2', boundingBox.x + 5)
@@ -239,6 +242,7 @@ export class D3graphComponent implements OnInit {
             .attr('stroke', 'red')
             .attr('shape-rendering', 'crispEdges')
 
+          // Middle Marks
           legend.append('line')
             .attr('x1', boundingBox.x + (boundingBox.width / 2) - 5)
             .attr('x2', boundingBox.x + (boundingBox.width / 2) + 5)
@@ -269,19 +273,112 @@ export class D3graphComponent implements OnInit {
             .attr('stroke', 'red')
             .attr('shape-rendering', 'crispEdges')
 
-            // Label the legend
-          boundingBox = (legend.node() as any).getBBox();
+          // Right Marks
+          legend.append('line')
+          .attr('x1', boundingBox.x + boundingBox.width - 5)
+          .attr('x2', boundingBox.x + boundingBox.width + 5)
+          .attr('y1', boundingBox.y)
+          .attr('y2', boundingBox.y)
+          .attr('stroke', 'red')
+          .attr('shape-rendering', 'crispEdges')
+        legend.append('line')
+          .attr('x1', boundingBox.x + boundingBox.width )
+          .attr('x2', boundingBox.x + boundingBox.width )
+          .attr('y1', boundingBox.y - 5)
+          .attr('y2', boundingBox.y + 5)
+          .attr('stroke', 'red')
+          .attr('shape-rendering', 'crispEdges')
+        
+        legend.append('line')
+          .attr('x1', boundingBox.x + boundingBox.width - 5)
+          .attr('x2', boundingBox.x + boundingBox.width + 5)
+          .attr('y1', boundingBox.y + boundingBox.height)
+          .attr('y2', boundingBox.y + boundingBox.height)
+          .attr('stroke', 'red')
+          .attr('shape-rendering', 'crispEdges')
+        legend.append('line')
+          .attr('x1', boundingBox.x + boundingBox.width )
+          .attr('x2', boundingBox.x + boundingBox.width )
+          .attr('y1', boundingBox.y + boundingBox.height - 5)
+          .attr('y2', boundingBox.y + boundingBox.height + 5)
+          .attr('stroke', 'red')
+          .attr('shape-rendering', 'crispEdges')
 
-          /*
-          console.log(boundingBox);
-          legend.append('rect')
-            .attr('x', boundingBox.x)
-            .attr('y', boundingBox.y)
-            .attr('width', boundingBox.width)
-            .attr('height', boundingBox.height)
-            .style('fill', 'none');
-          */
+        // Label the legend
+        //boundingBox = (legend.node() as any).getBBox();
+        let legendLabel = legend.append('text')
+          .attr('class', 'legend-label')
+          .attr('text-anchor', 'middle')
+          .text('Legend');
+        let legendLabelBoundingBox = (d3.select(this).select('.legend-label').node() as any).getBBox();
 
+        /*
+        legend.append('rect')
+          .attr('x', legendLabelBoundingBox.x)
+          .attr('y', legendLabelBoundingBox.y)
+          .attr('width', legendLabelBoundingBox.width)
+          .attr('height', legendLabelBoundingBox.height)
+          .style('fill', 'none')
+          .attr('stroke', axesColor)
+        */
+
+        // Find the mid anchor point of the outer bounding box
+        let midX = boundingBox.x + (boundingBox.width / 2);
+        let midY = boundingBox.y + (boundingBox.height / 2);
+
+        legend.append('line')
+        .attr('x1', midX - 5)
+        .attr('x2', midX + 5)
+        .attr('y1', midY)
+        .attr('y2', midY)
+        .attr('stroke', 'red')
+        .attr('shape-rendering', 'crispEdges')
+        legend.append('line')
+        .attr('x1', midX )
+        .attr('x2', midX )
+        .attr('y1', midY - 5)
+        .attr('y2', midY + 5)
+        .attr('stroke', 'red')
+        .attr('shape-rendering', 'crispEdges')
+
+        // Find current displacement of the legend label
+        let labelMidX = legendLabelBoundingBox.x + (legendLabelBoundingBox.width / 2);
+        let labelMidY = legendLabelBoundingBox.y + (legendLabelBoundingBox.height / 2);
+        
+        /*
+        legend.append('line')
+        .attr('x1', labelMidX - 5)
+        .attr('x2', labelMidX + 5)
+        .attr('y1', labelMidY)
+        .attr('y2', labelMidY)
+        .attr('stroke', 'green')
+        .attr('shape-rendering', 'crispEdges')
+        legend.append('line')
+        .attr('x1', labelMidX )
+        .attr('x2', labelMidX )
+        .attr('y1', labelMidY - 5)
+        .attr('y2', labelMidY + 5)
+        .attr('stroke', 'green')
+        .attr('shape-rendering', 'crispEdges')
+        */
+
+        // Find the difference
+        let diffX = labelMidX - midX;
+        let diffY = labelMidY - midY;
+
+        // Update the bbox
+        legendLabelBoundingBox = (d3.select(this).select('.legend-label').node() as any).getBBox();
+        legend.append('rect')
+          .attr('x', legendLabelBoundingBox.x)
+          .attr('y', legendLabelBoundingBox.y)
+          .attr('width', legendLabelBoundingBox.width)
+          .attr('height', legendLabelBoundingBox.height)
+          .style('fill', 'none')
+          .attr('stroke', axesColor)
+        
+        // Shift Legend to center
+        legendLabel.attr('transform', 'translate(' + (-1 * diffX) + ', ' + ((-1 * diffY) - (boundingBox.height / 2) ) + ')' );
+        
           /*
           legend.append('text')
             .attr('class', 'legend-label')
@@ -330,5 +427,23 @@ export class D3graphComponent implements OnInit {
       this.displayChart();
       this.lastResized = Date.now();
     }
+  }
+
+  addMark(selection: any, x: number, y: number) {
+    selection.append('line')
+    .attr('x1', x - 5)
+    .attr('x2', x + 5)
+    .attr('y1', y)
+    .attr('y2', y)
+    .attr('stroke', 'red')
+    .attr('shape-rendering', 'crispEdges')
+    selection.append('line')
+    .attr('x1', x )
+    .attr('x2', x )
+    .attr('y1', y - 5)
+    .attr('y2', y + 5)
+    .attr('stroke', 'red')
+    .attr('shape-rendering', 'crispEdges')
+    return selection;
   }
 }
