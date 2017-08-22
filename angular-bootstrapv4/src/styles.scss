@@ -43,3 +43,8 @@ $font-size-xs:   .625rem;
 .test-chart svg g {
   font-size: $font-size-base;
 }
+
+// Special overrides
+case-new-component {
+  width: 100%;
+}

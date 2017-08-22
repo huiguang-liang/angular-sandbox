@@ -1,0 +1,24 @@
+<h1 class="display-4">Create a New Case</h1>
+<hr class="my-4">
+
+<div class="container-fiuld">
+  <div class="card">
+    <div class="card-header">
+      Basic Case Information
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="caseRef" class="col-form-label">Case Reference Number</label>
+            <input type="text" class="form-control" id="caseRef" placeholder="Case Reference Number">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="caseDate" class="col-form-label">Date of Case Creation</label>
+            <input disabled type="text" class="form-control" [ngModel]="dateToday | date:'yyyy-MM-dd'" id="caseDate" name="caseDate">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
