@@ -4,7 +4,7 @@
 <div class="container-fiuld">
   <div class="card">
     <div class="card-header">
-      Basic Case Information
+      Basic Referrer Information
     </div>
     <div class="card-body">
       <form>
@@ -15,7 +15,71 @@
           </div>
           <div class="form-group col-md-6">
             <label for="caseDate" class="col-form-label">Date of Case Creation</label>
-            <input disabled type="text" class="form-control" [ngModel]="dateToday | date:'yyyy-MM-dd'" id="caseDate" name="caseDate">
+            <input readonly type="text" class="form-control form-control-plaintext" [ngModel]="dateToday | date:'yyyy-MM-dd'" id="caseDate"
+              name="caseDate">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="studentName" class="col-form-label">Name of Student</label>
+            <input type="text" class="form-control" id="studentName" placeholder="Student Name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="schoolName" class="col-form-label">Name of School</label>
+            <input type="text" class="form-control" id="schoolName" placeholder="School Name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="primaryCaseOfficerName" class="col-form-label">Name of Primary Case Officer</label>
+            <input type="text" class="form-control" id="primaryCaseOfficerName" placeholder="Case Officer Name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="secondaryCaseOfficerName" class="col-form-label">Name of Covering Case Officer</label>
+            <input type="text" class="form-control" id="secondaryCaseOfficerName" placeholder="Case Officer Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="servicesReferred">Service Referred</label>
+          <select multiple class="form-control" id="servicesReferred" style="height: 125px;">
+              <option>Counselling</option>
+              <option>Case Management</option>
+              <option>Financial Assistance</option>
+              <option>Job Related</option>
+              <option>Monitoring</option>
+            </select>
+          <small id="servicesReferredHelpBlock" class="form-text text-muted">
+            Hold the Ctrl (or Command Key on a Mac) and click to select multiple services.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Primary Spoken Language</label>
+          <div class="form-row">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langEnglish" value="langEnglish"> English
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langChinese" value="langChinese"> Chinese
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langMalay" value="langMalay"> Malay
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langTamil" value="langTamil"> Tamil
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langOthers" value="langOthers"> Others
+              </label>
+            </div>
           </div>
         </div>
       </form>
