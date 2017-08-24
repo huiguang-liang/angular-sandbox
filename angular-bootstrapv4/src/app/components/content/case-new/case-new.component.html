@@ -54,31 +54,35 @@
         </div>
         <div class="form-group">
           <label>Primary Spoken Language</label>
-          <div class="form-row">
-            <div class="form-check form-check-inline">
+          <div class="form-row align-items-center">
+            <div class="col-md-1 form-check form-check-inline">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langEnglish" value="langEnglish"> English
               </label>
             </div>
-            <div class="form-check form-check-inline">
+            <div class="col-md-1 form-check form-check-inline">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langChinese" value="langChinese"> Chinese
               </label>
             </div>
-            <div class="form-check form-check-inline">
+            <div class="col-md-1 form-check form-check-inline">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langMalay" value="langMalay"> Malay
               </label>
             </div>
-            <div class="form-check form-check-inline">
+            <div class="col-md-1 form-check form-check-inline">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langTamil" value="langTamil"> Tamil
               </label>
             </div>
-            <div class="form-check form-check-inline">
+            <div class="col-md-1 form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langOthers" value="langOthers"> Others
+                <input class="form-check-input" type="radio" name="primaryLanguageSpoken" id="langOthers" value="langOthers"> Others:
               </label>
+            </div>
+            <div class="col-auto form-check form-check-inline">
+              <label class="sr-only" for="langOthersInput">Name</label>
+              <input type="text" class="form-control" id="langOthersInput" placeholder="Language">
             </div>
           </div>
         </div>
